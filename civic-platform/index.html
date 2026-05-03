@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>CivicFix — Report Local Issues</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#f8fafc;--bg2:#f1f5f9;--card:#fff;--primary:#2563eb;--primary2:#1d4ed8;--green:#16a34a;--yellow:#d97706;--red:#dc2626;--text:#0f172a;--muted:#64748b;--border:#e2e8f0;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);}
+/* NAV */
+nav{background:var(--card);border-bottom:1px solid var(--border);padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 1px 3px rgba(0,0,0,.06);}
+.nav-logo{font-weight:700;font-size:1.2rem;color:var(--primary);display:flex;align-items:center;gap:.5rem;}
+.nav-logo span{background:var(--primary);color:#fff;padding:.15rem .5rem;border-radius:6px;font-size:.85rem;}
+.nav-right{display:flex;align-items:center;gap:1rem;}
+.btn{padding:.5rem 1.2rem;border-radius:8px;font-size:.85rem;font-weight:600;cursor:pointer;border:none;transition:all .2s;text-decoration:none;display:inline-flex;align-items:center;gap:.4rem;}
+.btn-primary{background:var(--primary);color:#fff;}
+.btn-primary:hover{background:var(--primary2);}
+.btn-outline{border:1px solid var(--border);background:transparent;color:var(--text);}
+.btn-outline:hover{border-color:var(--primary);color:var(--primary);}
+/* HERO STATS */
+.hero{background:linear-gradient(135deg,#1e3a8a,#2563eb,#0ea5e9);color:#fff;padding:3rem 2rem;text-align:center;}
+.hero h1{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;margin-bottom:.6rem;}
+.hero p{opacity:.85;font-size:1rem;max-width:520px;margin:0 auto 2rem;}
+.stat-row{display:flex;justify-content:center;gap:2.5rem;flex-wrap:wrap;}
+.stat{text-align:center;}
+.stat-n{font-size:2rem;font-weight:800;}
+.stat-l{font-size:.75rem;opacity:.75;letter-spacing:.06em;text-transform:uppercase;}
+/* MAIN LAYOUT */
+.main{max-width:1100px;margin:0 auto;padding:2rem;display:grid;grid-template-columns:1fr 340px;gap:1.5rem;align-items:start;}
+/* FILTERS */
+.filters{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem 1.2rem;display:flex;gap:.8rem;align-items:center;flex-wrap:wrap;margin-bottom:1.2rem;grid-column:1/-1;}
+.filter-btn{padding:.4rem .9rem;border-radius:999px;font-size:.78rem;font-weight:500;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--muted);transition:all .2s;}
+.filter-btn.active,.filter-btn:hover{border-color:var(--primary);color:var(--primary);background:rgba(37,99,235,.06);}
+.search-input{flex:1;min-width:180px;padding:.42rem .8rem;border:1px solid var(--border);border-radius:8px;font-size:.85rem;font-family:inherit;outline:none;color:var(--text);}
+.search-input:focus{border-color:var(--primary);}
+/* ISSUE CARDS */
+.issues-col{display:flex;flex-direction:column;gap:1rem;}
+.issue-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.4rem;transition:all .25s;cursor:pointer;}
+.issue-card:hover{border-color:var(--primary);box-shadow:0 4px 20px rgba(37,99,235,.1);transform:translateY(-1px);}
+.ic-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.7rem;}
+.ic-category{font-size:.68rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.2rem .6rem;border-radius:6px;}
+.cat-pothole{background:#fef3c7;color:#92400e;}
+.cat-garbage{background:#d1fae5;color:#065f46;}
+.cat-infra{background:#dbeafe;color:#1e40af;}
+.cat-water{background:#e0f2fe;color:#075985;}
+.cat-light{background:#fae8ff;color:#6b21a8;}
+.ic-status{font-size:.72rem;font-weight:600;display:flex;align-items:center;gap:.3rem;}
+.status-open{color:var(--red);}
+.status-progress{color:var(--yellow);}
+.status-resolved{color:var(--green);}
+.ic-title{font-size:1rem;font-weight:600;margin-bottom:.35rem;}
+.ic-desc{font-size:.875rem;color:var(--muted);line-height:1.6;margin-bottom:.8rem;}
+.ic-meta{display:flex;align-items:center;gap:1rem;font-size:.78rem;color:var(--muted);}
+.ic-location{display:flex;align-items:center;gap:.3rem;}
+.upvote-btn{display:flex;align-items:center;gap:.3rem;margin-left:auto;background:none;border:1px solid var(--border);border-radius:8px;padding:.28rem .65rem;cursor:pointer;font-size:.78rem;color:var(--muted);transition:all .2s;font-family:inherit;}
+.upvote-btn:hover,.upvote-btn.voted{border-color:var(--primary);color:var(--primary);background:rgba(37,99,235,.06);}
+/* SIDEBAR */
+.sidebar{display:flex;flex-direction:column;gap:1.2rem;}
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.4rem;}
+.card h3{font-size:.92rem;font-weight:700;margin-bottom:1rem;display:flex;align-items:center;gap:.5rem;}
+/* FORM */
+.form-group{margin-bottom:.9rem;}
+.form-label{font-size:.78rem;font-weight:600;color:var(--muted);display:block;margin-bottom:.35rem;letter-spacing:.04em;text-transform:uppercase;}
+.form-input,.form-select,.form-textarea{width:100%;padding:.55rem .8rem;border:1px solid var(--border);border-radius:8px;font-size:.88rem;font-family:inherit;color:var(--text);background:var(--bg);outline:none;transition:border .2s;}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--primary);}
+.form-textarea{resize:vertical;min-height:70px;}
+/* CHART */
+.chart-row{display:flex;gap:.4rem;align-items:flex-end;height:60px;margin-bottom:.5rem;}
+.bar{flex:1;border-radius:4px 4px 0 0;background:var(--primary);opacity:.7;transition:opacity .2s;cursor:pointer;}
+.bar:hover{opacity:1;}
+.chart-labels{display:flex;gap:.4rem;font-size:.62rem;color:var(--muted);}
+.chart-labels span{flex:1;text-align:center;}
+/* LEGEND */
+.legend-item{display:flex;align-items:center;gap:.5rem;font-size:.8rem;margin-bottom:.45rem;}
+.legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+/* MAP PLACEHOLDER */
+.map-ph{background:linear-gradient(135deg,#dbeafe,#e0f2fe);border-radius:10px;height:140px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--primary);font-weight:600;font-size:.85rem;gap:.3rem;}
+/* TOAST */
+.toast{position:fixed;bottom:2rem;right:2rem;background:#0f172a;color:#fff;padding:.75rem 1.2rem;border-radius:10px;font-size:.85rem;font-weight:500;z-index:999;transform:translateY(80px);opacity:0;transition:all .3s;}
+.toast.show{transform:none;opacity:1;}
+/* MODAL */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:200;display:none;align-items:center;justify-content:center;padding:1rem;}
+.overlay.open{display:flex;}
+.modal{background:var(--card);border-radius:16px;max-width:560px;width:100%;padding:2rem;max-height:90vh;overflow-y:auto;position:relative;}
+.modal-close{position:absolute;top:1rem;right:1rem;background:none;border:none;font-size:1.2rem;cursor:pointer;color:var(--muted);}
+.progress-bar{height:6px;border-radius:3px;background:var(--bg2);overflow:hidden;margin:1rem 0;}
+.progress-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--primary),#0ea5e9);}
+@media(max-width:768px){.main{grid-template-columns:1fr;}.sidebar{order:-1;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo"><span>⚡</span> CivicFix</div>
+  <div class="nav-right">
+    <span style="font-size:.82rem;color:var(--muted);">Ghaziabad, UP</span>
+    <button class="btn btn-primary" onclick="openReport()">+ Report Issue</button>
+  </div>
+</nav>
+
+<div class="hero">
+  <h1>Report. Track. Resolve.</h1>
+  <p>Empowering citizens to report local civic issues and hold authorities accountable for faster resolution.</p>
+  <div class="stat-row">
+    <div class="stat"><div class="stat-n" id="sTotal">0</div><div class="stat-l">Total Reports</div></div>
+    <div class="stat"><div class="stat-n" id="sResolved">0</div><div class="stat-l">Resolved</div></div>
+    <div class="stat"><div class="stat-n" id="sProgress">0</div><div class="stat-l">In Progress</div></div>
+    <div class="stat"><div class="stat-n" id="sOpen">0</div><div class="stat-l">Open</div></div>
+  </div>
+</div>
+
+<div class="main">
+  <!-- FILTERS -->
+  <div class="filters">
+    <input class="search-input" id="searchInput" placeholder="🔍  Search issues..." oninput="renderIssues()"/>
+    <button class="filter-btn active" onclick="setFilter('all',this)">All</button>
+    <button class="filter-btn" onclick="setFilter('open',this)">Open</button>
+    <button class="filter-btn" onclick="setFilter('progress',this)">In Progress</button>
+    <button class="filter-btn" onclick="setFilter('resolved',this)">Resolved</button>
+    <button class="filter-btn" onclick="setFilter('pothole',this)">🕳️ Pothole</button>
+    <button class="filter-btn" onclick="setFilter('garbage',this)">🗑️ Garbage</button>
+    <button class="filter-btn" onclick="setFilter('infra',this)">🏗️ Infrastructure</button>
+  </div>
+
+  <!-- ISSUES -->
+  <div class="issues-col" id="issuesList"></div>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <!-- MINI MAP -->
+    <div class="card">
+      <h3>📍 Issue Map — Ghaziabad</h3>
+      <div class="map-ph">
+        <div style="font-size:2rem">🗺️</div>
+        <div>Interactive map view</div>
+        <div style="font-size:.72rem;color:#64748b;font-weight:400;">Issues plotted by locality</div>
+      </div>
+    </div>
+
+    <!-- CHART -->
+    <div class="card">
+      <h3>📊 Weekly Reports</h3>
+      <div class="chart-row" id="chartBars"></div>
+      <div class="chart-labels"><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span></div>
+    </div>
+
+    <!-- LEGEND -->
+    <div class="card">
+      <h3>📋 Categories</h3>
+      <div class="legend-item"><div class="legend-dot" style="background:#d97706"></div><span>Potholes</span><span style="margin-left:auto;font-size:.75rem;color:var(--muted)" id="lPothole">0</span></div>
+      <div class="legend-item"><div class="legend-dot" style="background:#16a34a"></div><span>Garbage</span><span style="margin-left:auto;font-size:.75rem;color:var(--muted)" id="lGarbage">0</span></div>
+      <div class="legend-item"><div class="legend-dot" style="background:#2563eb"></div><span>Infrastructure</span><span style="margin-left:auto;font-size:.75rem;color:var(--muted)" id="lInfra">0</span></div>
+      <div class="legend-item"><div class="legend-dot" style="background:#0ea5e9"></div><span>Water Supply</span><span style="margin-left:auto;font-size:.75rem;color:var(--muted)" id="lWater">0</span></div>
+      <div class="legend-item"><div class="legend-dot" style="background:#9333ea"></div><span>Street Light</span><span style="margin-left:auto;font-size:.75rem;color:var(--muted)" id="lLight">0</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- REPORT MODAL -->
+<div class="overlay" id="reportOverlay">
+  <div class="modal">
+    <button class="modal-close" onclick="closeReport()">✕</button>
+    <h2 style="font-size:1.2rem;font-weight:700;margin-bottom:1.2rem;">📝 Report an Issue</h2>
+    <div class="form-group">
+      <label class="form-label">Issue Title</label>
+      <input class="form-input" id="fTitle" placeholder="e.g. Large pothole on Raj Nagar road"/>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Category</label>
+      <select class="form-select" id="fCat">
+        <option value="pothole">🕳️ Pothole</option>
+        <option value="garbage">🗑️ Garbage / Waste</option>
+        <option value="infra">🏗️ Infrastructure</option>
+        <option value="water">💧 Water Supply</option>
+        <option value="light">💡 Street Light</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Location / Area</label>
+      <input class="form-input" id="fLoc" placeholder="e.g. Sector 5, Raj Nagar, Ghaziabad"/>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Description</label>
+      <textarea class="form-textarea" id="fDesc" placeholder="Describe the issue in detail..."></textarea>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Your Name</label>
+      <input class="form-input" id="fName" placeholder="Anonymous"/>
+    </div>
+    <button class="btn btn-primary" style="width:100%;justify-content:center;padding:.7rem" onclick="submitReport()">Submit Report →</button>
+  </div>
+</div>
+
+<!-- DETAIL MODAL -->
+<div class="overlay" id="detailOverlay">
+  <div class="modal" id="detailModal"></div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+let filter = 'all';
+let issues = [
+  {id:1,title:'Deep pothole on Main Market Road',desc:'Large pothole causing accidents near the main chowk. Vehicles getting damaged daily.',category:'pothole',location:'Raj Nagar, Ghaziabad',status:'progress',votes:24,reporter:'Anjali S.',date:'2025-04-28'},
+  {id:2,title:'Overflowing garbage bins near park',desc:'Municipal bins have not been emptied in 5+ days. Causing foul smell and mosquito breeding.',category:'garbage',location:'Vaishali Sector 3',status:'open',votes:18,reporter:'Rohit K.',date:'2025-04-30'},
+  {id:3,title:'Broken footpath tiles — fall hazard',desc:'Multiple footpath tiles broken on school route. Children and elderly at risk of tripping.',category:'infra',location:'Kaushambi Main Road',status:'open',votes:31,reporter:'Meena T.',date:'2025-05-01'},
+  {id:4,title:'No water supply for 3 days',desc:'Colony has had zero water supply since Monday morning. Residents struggling.',category:'water',location:'Indirapuram, Block C',status:'resolved',votes:47,reporter:'Suresh M.',date:'2025-04-25'},
+  {id:5,title:'Street lights non-functional',desc:'Entire stretch of Lohia Nagar road has no street lighting since 2 weeks.',category:'light',location:'Lohia Nagar',status:'open',votes:22,reporter:'Priya V.',date:'2025-05-02'},
+  {id:6,title:'Pothole at highway junction',desc:'Dangerous pothole at the NH-9 junction causing traffic slowdowns.',category:'pothole',location:'NH-9, Mohan Nagar',status:'resolved',votes:55,reporter:'Amit D.',date:'2025-04-20'},
+];
+let votedIds = new Set();
+let nextId = 7;
+
+function setFilter(f, btn) {
+  filter = f;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderIssues();
+}
+
+function catClass(c){return{pothole:'cat-pothole',garbage:'cat-garbage',infra:'cat-infra',water:'cat-water',light:'cat-light'}[c]||'cat-infra';}
+function catLabel(c){return{pothole:'🕳️ Pothole',garbage:'🗑️ Garbage',infra:'🏗️ Infrastructure',water:'💧 Water',light:'💡 Street Light'}[c]||c;}
+function statusClass(s){return{open:'status-open',progress:'status-progress',resolved:'status-resolved'}[s]||'';}
+function statusLabel(s){return{open:'● Open',progress:'◐ In Progress',resolved:'✓ Resolved'}[s]||s;}
+function progressPct(s){return{open:10,progress:55,resolved:100}[s]||0;}
+
+function renderIssues() {
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  let list = issues.filter(i => {
+    const matchFilter = filter==='all' || i.status===filter || i.category===filter;
+    const matchSearch = !q || i.title.toLowerCase().includes(q) || i.location.toLowerCase().includes(q) || i.desc.toLowerCase().includes(q);
+    return matchFilter && matchSearch;
+  });
+  list.sort((a,b) => b.votes - a.votes);
+
+  const el = document.getElementById('issuesList');
+  el.innerHTML = list.length ? '' : '<div style="text-align:center;padding:3rem;color:var(--muted)">No issues found.</div>';
+  list.forEach(issue => {
+    const div = document.createElement('div');
+    div.className = 'issue-card';
+    div.innerHTML = `
+      <div class="ic-top">
+        <span class="ic-category ${catClass(issue.category)}">${catLabel(issue.category)}</span>
+        <span class="ic-status ${statusClass(issue.status)}">${statusLabel(issue.status)}</span>
+      </div>
+      <div class="ic-title">${issue.title}</div>
+      <div class="ic-desc">${issue.desc}</div>
+      <div class="ic-meta">
+        <span class="ic-location">📍 ${issue.location}</span>
+        <span>📅 ${issue.date}</span>
+        <button class="upvote-btn ${votedIds.has(issue.id)?'voted':''}" onclick="upvote(event,${issue.id})">
+          ▲ <span id="v${issue.id}">${issue.votes}</span>
+        </button>
+      </div>`;
+    div.onclick = (e) => { if(!e.target.closest('.upvote-btn')) openDetail(issue.id); };
+    el.appendChild(div);
+  });
+  updateStats(); updateLegend();
+}
+
+function upvote(e, id) {
+  e.stopPropagation();
+  const issue = issues.find(i=>i.id===id);
+  if(votedIds.has(id)){votedIds.delete(id);issue.votes--;showToast('Vote removed');}
+  else{votedIds.add(id);issue.votes++;showToast('Thanks for upvoting!');}
+  renderIssues();
+}
+
+function openDetail(id) {
+  const issue = issues.find(i=>i.id===id);
+  const pct = progressPct(issue.status);
+  document.getElementById('detailModal').innerHTML = `
+    <button class="modal-close" onclick="document.getElementById('detailOverlay').classList.remove('open')">✕</button>
+    <span class="ic-category ${catClass(issue.category)}" style="margin-bottom:.8rem;display:inline-block">${catLabel(issue.category)}</span>
+    <h2 style="font-size:1.25rem;font-weight:700;margin-bottom:.5rem">${issue.title}</h2>
+    <div style="display:flex;gap:1rem;font-size:.8rem;color:var(--muted);margin-bottom:1rem">
+      <span>📍 ${issue.location}</span><span>📅 ${issue.date}</span><span>👤 ${issue.reporter}</span>
+    </div>
+    <p style="color:var(--muted);font-size:.92rem;line-height:1.7;margin-bottom:1.2rem">${issue.desc}</p>
+    <div style="font-size:.78rem;font-weight:600;color:var(--muted);margin-bottom:.3rem;text-transform:uppercase;letter-spacing:.06em">Resolution Progress</div>
+    <div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>
+    <div style="display:flex;justify-content:space-between;font-size:.75rem;color:var(--muted)"><span>Reported</span><span>In Review</span><span>Resolved</span></div>
+    <div style="margin-top:1.2rem;padding:.8rem;background:var(--bg2);border-radius:8px;font-size:.84rem;color:var(--muted)">
+      Status: <strong class="${statusClass(issue.status)}">${statusLabel(issue.status)}</strong> &nbsp;·&nbsp; ${issue.votes} upvotes
+    </div>`;
+  document.getElementById('detailOverlay').classList.add('open');
+}
+
+function openReport(){ document.getElementById('reportOverlay').classList.add('open'); }
+function closeReport(){ document.getElementById('reportOverlay').classList.remove('open'); }
+
+function submitReport() {
+  const title = document.getElementById('fTitle').value.trim();
+  const loc = document.getElementById('fLoc').value.trim();
+  if(!title||!loc){showToast('⚠️ Please fill required fields');return;}
+  const newIssue = {
+    id:nextId++,
+    title,desc:document.getElementById('fDesc').value||'No description provided.',
+    category:document.getElementById('fCat').value,
+    location:loc,status:'open',votes:0,
+    reporter:document.getElementById('fName').value||'Anonymous',
+    date:new Date().toISOString().slice(0,10)
+  };
+  issues.unshift(newIssue);
+  ['fTitle','fDesc','fLoc','fName'].forEach(id=>document.getElementById(id).value='');
+  closeReport(); renderIssues(); showToast('✅ Issue reported successfully!');
+}
+
+function updateStats() {
+  document.getElementById('sTotal').textContent = issues.length;
+  document.getElementById('sResolved').textContent = issues.filter(i=>i.status==='resolved').length;
+  document.getElementById('sProgress').textContent = issues.filter(i=>i.status==='progress').length;
+  document.getElementById('sOpen').textContent = issues.filter(i=>i.status==='open').length;
+}
+
+function updateLegend() {
+  ['pothole','garbage','infra','water','light'].forEach(c=>{
+    const el=document.getElementById('l'+c.charAt(0).toUpperCase()+c.slice(1));
+    if(el)el.textContent=issues.filter(i=>i.category===c).length;
+  });
+}
+
+function buildChart() {
+  const vals=[4,7,3,9,6,11,5];const max=Math.max(...vals);
+  const el=document.getElementById('chartBars');
+  el.innerHTML=vals.map(v=>`<div class="bar" style="height:${(v/max*100)}%;opacity:${.5+v/max*.5}" title="${v} reports"></div>`).join('');
+}
+
+function showToast(msg) {
+  const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2500);
+}
+
+document.querySelectorAll('.overlay').forEach(o=>o.addEventListener('click',e=>{if(e.target===o)o.classList.remove('open');}));
+renderIssues(); buildChart();
+</script>
+</body>
+</html>

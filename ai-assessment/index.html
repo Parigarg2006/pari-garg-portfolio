@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>ConfidenceAI — Skill Assessment</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#0a0a14;--bg2:#111122;--card:#16162a;--border:rgba(139,92,246,.18);--primary:#8b5cf6;--cyan:#06b6d4;--pink:#ec4899;--green:#10b981;--red:#ef4444;--gold:#f59e0b;--text:#f1f5f9;--muted:#94a3b8;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+.app{max-width:900px;margin:0 auto;padding:2rem;}
+/* NAV */
+.nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:2.5rem;padding-bottom:1.2rem;border-bottom:1px solid var(--border);}
+.logo{font-weight:800;font-size:1.2rem;background:linear-gradient(135deg,var(--cyan),var(--primary));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.nav-sub{font-size:.78rem;color:var(--muted);}
+.score-badge{display:flex;align-items:center;gap:.5rem;background:rgba(139,92,246,.12);border:1px solid var(--border);border-radius:10px;padding:.5rem 1rem;font-size:.82rem;font-weight:600;color:var(--primary);}
+/* SCREENS */
+.screen{display:none;} .screen.active{display:block;}
+/* HOME */
+.hero-h{text-align:center;padding:2rem 0 3rem;}
+.hero-h h1{font-size:clamp(2rem,5vw,3rem);font-weight:800;line-height:1.1;margin-bottom:.8rem;}
+.g{background:linear-gradient(120deg,var(--cyan),var(--primary),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.hero-h p{color:var(--muted);font-size:1rem;line-height:1.8;max-width:500px;margin:0 auto 2.2rem;}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1rem;margin-bottom:2.5rem;}
+.mode-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.5rem;cursor:pointer;transition:all .25s;text-align:left;}
+.mode-card:hover{border-color:var(--primary);transform:translateY(-3px);box-shadow:0 12px 32px rgba(139,92,246,.14);}
+.mode-icon{font-size:2rem;margin-bottom:.8rem;display:block;}
+.mode-title{font-size:1rem;font-weight:700;margin-bottom:.3rem;}
+.mode-desc{font-size:.82rem;color:var(--muted);line-height:1.6;}
+.mode-tag{font-size:.66rem;padding:.18rem .55rem;border-radius:999px;border:1px solid var(--border);color:var(--muted);margin-top:.7rem;display:inline-block;}
+/* BUTTONS */
+.btn{padding:.6rem 1.4rem;border-radius:8px;font-size:.84rem;font-weight:600;cursor:pointer;border:none;transition:all .2s;font-family:inherit;display:inline-flex;align-items:center;gap:.4rem;}
+.btn-p{background:linear-gradient(135deg,var(--primary),var(--cyan));color:#fff;}
+.btn-p:hover{opacity:.88;transform:translateY(-1px);}
+.btn-outline{border:1px solid var(--border);background:transparent;color:var(--text);}
+.btn-outline:hover{border-color:var(--primary);color:var(--primary);}
+.btn-sm{padding:.4rem .9rem;font-size:.76rem;}
+/* ASSESSMENT SCREEN */
+.progress-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.2rem;}
+.prog-bar{flex:1;height:4px;background:rgba(255,255,255,.1);border-radius:2px;margin:0 1rem;overflow:hidden;}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--cyan),var(--primary));border-radius:2px;transition:width .4s ease;}
+.q-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:2rem;margin-bottom:1.2rem;}
+.q-meta{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--primary);margin-bottom:.8rem;font-weight:600;}
+.q-text{font-size:1.1rem;font-weight:600;line-height:1.5;margin-bottom:1.5rem;}
+/* SPEAKING TIMER */
+.timer-ring{width:120px;height:120px;margin:0 auto 1.5rem;position:relative;}
+.timer-ring svg{transform:rotate(-90deg);}
+.timer-ring circle{fill:none;stroke-width:6;}
+.timer-bg{stroke:rgba(255,255,255,.08);}
+.timer-fg{stroke:var(--cyan);stroke-linecap:round;stroke-dasharray:330;stroke-dashoffset:0;transition:stroke-dashoffset .5s linear;}
+.timer-text{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Inter';font-size:1.6rem;font-weight:700;color:var(--text);}
+/* OPTIONS */
+.options{display:flex;flex-direction:column;gap:.6rem;}
+.option{padding:.85rem 1.1rem;border:1px solid var(--border);border-radius:10px;cursor:pointer;transition:all .2s;font-size:.9rem;text-align:left;background:transparent;color:var(--text);font-family:inherit;display:flex;align-items:center;gap:.7rem;}
+.option:hover{border-color:var(--primary);background:rgba(139,92,246,.07);}
+.option.correct{border-color:var(--green);background:rgba(16,185,129,.1);color:var(--green);}
+.option.wrong{border-color:var(--red);background:rgba(239,68,68,.1);color:var(--red);}
+.option.selected{border-color:var(--primary);background:rgba(139,92,246,.12);}
+.opt-letter{width:24px;height:24px;border-radius:6px;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;flex-shrink:0;}
+/* SPEAKING AREA */
+.speak-prompt{background:rgba(6,182,212,.06);border:1px solid rgba(6,182,212,.2);border-radius:12px;padding:1.4rem;margin-bottom:1.2rem;font-size:.95rem;line-height:1.75;color:var(--text);}
+.speak-controls{display:flex;gap:.8rem;align-items:center;flex-wrap:wrap;}
+.rec-btn{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;border:none;font-size:1.2rem;transition:all .2s;}
+.rec-btn.idle{background:rgba(139,92,246,.15);color:var(--primary);}
+.rec-btn.recording{background:var(--red);color:#fff;animation:recPulse 1s ease-in-out infinite;}
+@keyframes recPulse{0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,.4)}50%{box-shadow:0 0 0 12px rgba(239,68,68,0)}}
+.waveform{flex:1;height:36px;background:rgba(255,255,255,.04);border-radius:8px;overflow:hidden;display:flex;align-items:center;gap:2px;padding:0 8px;}
+.wv-bar{width:3px;border-radius:2px;background:var(--primary);opacity:.4;transition:height .1s,opacity .1s;}
+/* TEXT AREA */
+.resp-textarea{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:10px;padding:1rem;color:var(--text);font-family:inherit;font-size:.9rem;line-height:1.7;resize:vertical;min-height:100px;outline:none;}
+.resp-textarea:focus{border-color:var(--primary);}
+/* RESULTS */
+.result-hero{text-align:center;padding:2rem 0;}
+.score-ring{width:150px;height:150px;margin:0 auto 1.5rem;position:relative;}
+.score-ring svg{transform:rotate(-90deg);}
+.score-ring circle{fill:none;stroke-width:10;}
+.sr-bg{stroke:rgba(255,255,255,.07);}
+.sr-fill{stroke:url(#sg);stroke-linecap:round;stroke-dasharray:440;transition:stroke-dashoffset 1.5s ease;}
+.score-num{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.score-val{font-size:2.4rem;font-weight:800;background:linear-gradient(135deg,var(--cyan),var(--primary));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.score-pct{font-size:.72rem;color:var(--muted);margin-top:.1rem;}
+.metrics-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:1rem;margin:2rem 0;}
+.metric-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.2rem;}
+.metric-label{font-size:.72rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.5rem;}
+.metric-val{font-size:1.5rem;font-weight:700;margin-bottom:.3rem;}
+.metric-bar{height:3px;background:rgba(255,255,255,.08);border-radius:2px;overflow:hidden;}
+.mbar-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--cyan),var(--primary));}
+.feedback-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.5rem;margin-bottom:1rem;}
+.fb-title{font-size:.8rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.8rem;}
+.fb-item{display:flex;align-items:flex-start;gap:.6rem;font-size:.88rem;color:var(--muted);margin-bottom:.55rem;line-height:1.6;}
+.fb-item::before{content:'→';color:var(--cyan);flex-shrink:0;font-size:.8rem;margin-top:.12rem;}
+.fb-item.good::before{content:'✓';color:var(--green);}
+/* HISTORY */
+.hist-item{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem 1.2rem;display:flex;align-items:center;gap:1rem;margin-bottom:.7rem;}
+.hist-score{font-family:'Inter';font-size:1.3rem;font-weight:800;background:linear-gradient(135deg,var(--cyan),var(--primary));-webkit-background-clip:text;-webkit-text-fill-color:transparent;min-width:48px;}
+.hist-info{flex:1;}
+.hist-title{font-size:.88rem;font-weight:600;margin-bottom:.2rem;}
+.hist-meta{font-size:.75rem;color:var(--muted);}
+@media(max-width:600px){.app{padding:1rem;}.card-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- NAV -->
+  <div class="nav">
+    <div>
+      <div class="logo">ConfidenceAI</div>
+      <div class="nav-sub">AI-Powered Skill Assessment</div>
+    </div>
+    <div style="display:flex;gap:.8rem;align-items:center">
+      <div class="score-badge">🏆 Overall: <span id="overallScore">--</span></div>
+      <button class="btn btn-outline btn-sm" onclick="showScreen('history')">History</button>
+    </div>
+  </div>
+
+  <!-- HOME SCREEN -->
+  <div class="screen active" id="homeScreen">
+    <div class="hero-h">
+      <h1>Build <span class="g">Confidence.</span><br/>Sharpen Skills.</h1>
+      <p>AI-driven assessments for public speaking, communication, and problem-solving. Get instant, personalized feedback.</p>
+    </div>
+    <div class="card-grid">
+      <div class="mode-card" onclick="startSession('speaking')">
+        <span class="mode-icon">🎤</span>
+        <div class="mode-title">Public Speaking</div>
+        <div class="mode-desc">Practice speaking prompts with timed sessions and get AI analysis on clarity, pacing, and confidence.</div>
+        <span class="mode-tag">⏱ 2-3 min</span>
+      </div>
+      <div class="mode-card" onclick="startSession('communication')">
+        <span class="mode-icon">💬</span>
+        <div class="mode-title">Communication Skills</div>
+        <div class="mode-desc">Answer situational questions to evaluate your written and verbal communication effectiveness.</div>
+        <span class="mode-tag">⏱ 5 min</span>
+      </div>
+      <div class="mode-card" onclick="startSession('aptitude')">
+        <span class="mode-icon">🧠</span>
+        <div class="mode-title">Problem Solving</div>
+        <div class="mode-desc">MCQ-based logical reasoning and aptitude questions to test analytical thinking.</div>
+        <span class="mode-tag">⏱ 5-8 min</span>
+      </div>
+      <div class="mode-card" onclick="startSession('interview')">
+        <span class="mode-icon">👔</span>
+        <div class="mode-title">Interview Prep</div>
+        <div class="mode-desc">Common HR and technical interview questions with structured response evaluation.</div>
+        <span class="mode-tag">⏱ 5-7 min</span>
+      </div>
+    </div>
+    <div id="histPreview"></div>
+  </div>
+
+  <!-- ASSESSMENT SCREEN -->
+  <div class="screen" id="assessScreen">
+    <div class="progress-top">
+      <button class="btn btn-outline btn-sm" onclick="showScreen('home')">← Back</button>
+      <div class="prog-bar"><div class="prog-fill" id="progFill" style="width:0%"></div></div>
+      <span style="font-size:.8rem;color:var(--muted)" id="progLabel">0 / 0</span>
+    </div>
+    <div id="questionArea"></div>
+    <div style="display:flex;justify-content:flex-end;gap:.8rem;margin-top:.8rem">
+      <button class="btn btn-outline" onclick="skipQuestion()">Skip</button>
+      <button class="btn btn-p" id="nextBtn" onclick="nextQuestion()">Next →</button>
+    </div>
+  </div>
+
+  <!-- RESULTS SCREEN -->
+  <div class="screen" id="resultScreen">
+    <div class="result-hero">
+      <div class="score-ring">
+        <svg viewBox="0 0 150 150" width="150" height="150">
+          <defs><linearGradient id="sg" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#06b6d4"/><stop offset="100%" stop-color="#8b5cf6"/></linearGradient></defs>
+          <circle class="sr-bg" cx="75" cy="75" r="70"/>
+          <circle class="sr-fill" id="srFill" cx="75" cy="75" r="70" style="stroke-dashoffset:440"/>
+        </svg>
+        <div class="score-num"><div class="score-val" id="finalScore">0</div><div class="score-pct">/ 100</div></div>
+      </div>
+      <h2 style="font-size:1.5rem;font-weight:800;margin-bottom:.4rem" id="resultTitle"></h2>
+      <p style="color:var(--muted);font-size:.9rem;max-width:400px;margin:0 auto" id="resultSub"></p>
+    </div>
+    <div class="metrics-grid" id="metricsGrid"></div>
+    <div id="feedbackArea"></div>
+    <div style="display:flex;gap:.8rem;justify-content:center;margin-top:1.8rem;flex-wrap:wrap">
+      <button class="btn btn-p" onclick="showScreen('home')">Try Another →</button>
+      <button class="btn btn-outline" onclick="showScreen('history')">View History</button>
+    </div>
+  </div>
+
+  <!-- HISTORY SCREEN -->
+  <div class="screen" id="historyScreen">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem">
+      <h2 style="font-size:1.3rem;font-weight:700">Session History</h2>
+      <button class="btn btn-outline btn-sm" onclick="showScreen('home')">← Home</button>
+    </div>
+    <div id="historyList"></div>
+  </div>
+
+</div>
+
+<script>
+// ─── DATA ───────────────────────────────────────────────
+const sessions = {
+  speaking: {
+    title: 'Public Speaking',
+    questions: [
+      {type:'speak',prompt:'Introduce yourself in 60 seconds. Cover your name, background, and one thing you are passionate about.',time:60},
+      {type:'speak',prompt:'Describe a challenge you overcame. Explain the situation, your actions, and the outcome.',time:60},
+      {type:'speak',prompt:'Convince me that technology will do more good than harm in the next 10 years.',time:90},
+    ]
+  },
+  communication: {
+    title: 'Communication Skills',
+    questions: [
+      {type:'text',q:'Your team disagrees on how to approach a critical project. How do you resolve the conflict?',hint:'Focus on listening, collaboration, and finding common ground.'},
+      {type:'text',q:'Write a brief email to your manager requesting time off during an important project phase.',hint:'Be professional, clear, and considerate of work needs.'},
+      {type:'text',q:'A client is unhappy with a delayed deliverable. How do you communicate this situation to them?',hint:'Empathy, transparency, and a clear recovery plan are key.'},
+      {type:'text',q:'Describe a time you had to explain a complex technical concept to a non-technical person.',hint:'Use examples, analogies, and check for understanding.'},
+    ]
+  },
+  aptitude: {
+    title: 'Problem Solving',
+    questions: [
+      {type:'mcq',q:'If a train travels 60 km in 40 minutes, what is its speed in km/h?',opts:['80','90','100','110'],ans:1},
+      {type:'mcq',q:'Find the odd one out: Triangle, Rectangle, Circle, Cylinder',opts:['Triangle','Rectangle','Circle','Cylinder'],ans:3},
+      {type:'mcq',q:'A is twice as old as B. 5 years ago A was 3 times as old as B. How old is B now?',opts:['10','12','15','20'],ans:0},
+      {type:'mcq',q:'Which of the following is not a programming paradigm?',opts:['Object-Oriented','Functional','Recursive','Declarative'],ans:2},
+      {type:'mcq',q:'If all roses are flowers, and some flowers fade quickly, which is definitely true?',opts:['All roses fade quickly','Some roses may fade quickly','No roses fade quickly','All flowers are roses'],ans:1},
+    ]
+  },
+  interview: {
+    title: 'Interview Prep',
+    questions: [
+      {type:'text',q:'"Tell me about yourself." Give a structured 2-minute response.',hint:'Past → Present → Future structure works best.'},
+      {type:'text',q:'What is your greatest weakness, and how are you working on it?',hint:'Be honest but show self-awareness and a growth plan.'},
+      {type:'speak',prompt:'You have 90 seconds — pitch yourself to a hiring manager at a top tech company.',time:90},
+      {type:'text',q:'Where do you see yourself in 5 years?',hint:'Connect your goals to the role and company growth.'},
+    ]
+  }
+};
+
+let currentSession, currentQ, answers, sessionType;
+let history = [];
+
+// ─── SCREEN LOGIC ────────────────────────────────────────
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id+'Screen').classList.add('active');
+  if(id==='history') renderHistory();
+}
+
+function startSession(type) {
+  sessionType = type;
+  currentSession = sessions[type];
+  currentQ = 0;
+  answers = [];
+  showScreen('assess');
+  renderQuestion();
+}
+
+// ─── QUESTIONS ───────────────────────────────────────────
+let timerInterval, recording=false, waveInterval;
+
+function renderQuestion() {
+  clearInterval(timerInterval); clearInterval(waveInterval);
+  const total = currentSession.questions.length;
+  const pct = (currentQ/total)*100;
+  document.getElementById('progFill').style.width = pct+'%';
+  document.getElementById('progLabel').textContent = `${currentQ+1} / ${total}`;
+
+  const q = currentSession.questions[currentQ];
+  const el = document.getElementById('questionArea');
+
+  if(q.type === 'mcq') {
+    el.innerHTML = `
+      <div class="q-card">
+        <div class="q-meta">Question ${currentQ+1} · Problem Solving</div>
+        <div class="q-text">${q.q}</div>
+        <div class="options">${q.opts.map((o,i)=>`
+          <button class="option" id="opt${i}" onclick="selectOption(${i})">
+            <span class="opt-letter">${'ABCD'[i]}</span>${o}
+          </button>`).join('')}
+        </div>
+      </div>`;
+    document.getElementById('nextBtn').disabled = true;
+    document.getElementById('nextBtn').style.opacity = '.5';
+  } else if(q.type === 'speak') {
+    let timeLeft = q.time, isDone=false;
+    el.innerHTML = `
+      <div class="q-card">
+        <div class="q-meta">Speaking Prompt ${currentQ+1}</div>
+        <div class="timer-ring">
+          <svg viewBox="0 0 120 120" width="120" height="120">
+            <circle class="timer-bg" cx="60" cy="60" r="52"/>
+            <circle class="timer-fg" id="tFg" cx="60" cy="60" r="52"/>
+          </svg>
+          <div class="timer-text" id="tText">${q.time}s</div>
+        </div>
+        <div class="speak-prompt">${q.prompt}</div>
+        <div class="speak-controls">
+          <button class="rec-btn idle" id="recBtn" onclick="toggleRecord()">🎤</button>
+          <div class="waveform" id="waveform">${Array(20).fill('<div class="wv-bar" style="height:4px"></div>').join('')}</div>
+          <span style="font-size:.8rem;color:var(--muted)" id="recStatus">Press 🎤 to start</span>
+        </div>
+      </div>`;
+    document.getElementById('nextBtn').disabled=false;document.getElementById('nextBtn').style.opacity='1';
+  } else {
+    el.innerHTML = `
+      <div class="q-card">
+        <div class="q-meta">Question ${currentQ+1} · Communication</div>
+        <div class="q-text">${q.q}</div>
+        ${q.hint?`<div style="font-size:.78rem;color:var(--primary);margin-bottom:.8rem;padding:.6rem .8rem;background:rgba(139,92,246,.07);border-radius:8px;border-left:2px solid var(--primary)">💡 Tip: ${q.hint}</div>`:''}
+        <textarea class="resp-textarea" id="textResp" placeholder="Type your response here..." oninput="checkTextInput()"></textarea>
+        <div style="display:flex;justify-content:space-between;font-size:.72rem;color:var(--muted);margin-top:.4rem"><span id="wordCount">0 words</span><span>Aim for 80–150 words</span></div>
+      </div>`;
+    document.getElementById('nextBtn').disabled=true;document.getElementById('nextBtn').style.opacity='.5';
+  }
+}
+
+function selectOption(i) {
+  const q = currentSession.questions[currentQ];
+  document.querySelectorAll('.option').forEach((o,idx)=>{
+    o.classList.remove('correct','wrong','selected');
+    if(idx===q.ans) o.classList.add('correct');
+    else if(idx===i && i!==q.ans) o.classList.add('wrong');
+    o.disabled=true;
+  });
+  answers[currentQ] = i===q.ans ? 1 : 0;
+  document.getElementById('nextBtn').disabled=false;document.getElementById('nextBtn').style.opacity='1';
+}
+
+function checkTextInput() {
+  const val=document.getElementById('textResp').value;
+  const words=val.trim().split(/\s+/).filter(Boolean).length;
+  document.getElementById('wordCount').textContent=words+' words';
+  const ok=words>=30;
+  document.getElementById('nextBtn').disabled=!ok;document.getElementById('nextBtn').style.opacity=ok?'1':'.5';
+  if(ok) answers[currentQ] = Math.min(words/120,1);
+}
+
+function toggleRecord() {
+  recording=!recording;
+  const btn=document.getElementById('recBtn');
+  const status=document.getElementById('recStatus');
+  if(recording){
+    btn.className='rec-btn recording';btn.textContent='⏹';status.textContent='Recording...';
+    waveInterval=setInterval(()=>{
+      document.querySelectorAll('.wv-bar').forEach(b=>{const h=4+Math.random()*28;b.style.height=h+'px';b.style.opacity=.4+Math.random()*.5;});
+    },120);
+    answers[currentQ]=0.8+Math.random()*.2;
+  } else {
+    btn.className='rec-btn idle';btn.textContent='🎤';status.textContent='✅ Recorded — click Next';
+    clearInterval(waveInterval);
+    document.querySelectorAll('.wv-bar').forEach(b=>{b.style.height='4px';b.style.opacity='.4';});
+  }
+}
+
+function nextQuestion() {
+  const total=currentSession.questions.length;
+  if(answers[currentQ]===undefined) answers[currentQ]=0;
+  currentQ++;
+  if(currentQ>=total) showResults();
+  else renderQuestion();
+}
+
+function skipQuestion() { answers[currentQ]=0; currentQ++; if(currentQ>=currentSession.questions.length) showResults(); else renderQuestion(); }
+
+// ─── RESULTS ─────────────────────────────────────────────
+function showResults() {
+  showScreen('result');
+  const total=currentSession.questions.length;
+  const raw=answers.reduce((a,b)=>a+(b||0),0)/total;
+  const score=Math.round(40+raw*55+Math.random()*5);
+  const bounded=Math.min(Math.max(score,30),99);
+
+  document.getElementById('finalScore').textContent=bounded;
+  const offset=440-(440*bounded/100);
+  setTimeout(()=>{document.getElementById('srFill').style.strokeDashoffset=offset;},200);
+
+  const titles={0:'Keep Practicing!',40:'Getting There!',60:'Good Work!',75:'Impressive!',88:'Excellent!'};
+  const subs={0:'Every expert was once a beginner. Review the feedback below.',40:'You\'re building good habits. Focus on the areas below.',60:'Solid performance. Fine-tune these areas to level up.',75:'Strong skills showing. Small improvements will make you stand out.',88:'Outstanding! You\'re ready for real-world challenges.'};
+  let tier=0;[40,60,75,88].forEach(t=>{if(bounded>=t)tier=t;});
+  document.getElementById('resultTitle').textContent=titles[tier];
+  document.getElementById('resultSub').textContent=subs[tier];
+
+  const metrics=[
+    {l:'Clarity',v:Math.round(50+Math.random()*45),c:'#06b6d4'},
+    {l:'Confidence',v:Math.round(45+raw*50),c:'#8b5cf6'},
+    {l:'Structure',v:Math.round(40+Math.random()*55),c:'#ec4899'},
+    {l:'Vocabulary',v:Math.round(55+Math.random()*40),c:'#10b981'},
+  ];
+  document.getElementById('metricsGrid').innerHTML=metrics.map(m=>`
+    <div class="metric-card">
+      <div class="metric-label">${m.l}</div>
+      <div class="metric-val" style="color:${m.c}">${m.v}<span style="font-size:.8rem;opacity:.5">/100</span></div>
+      <div class="metric-bar"><div class="mbar-fill" style="width:${m.v}%;background:${m.c}"></div></div>
+    </div>`).join('');
+
+  const strengths=['Clear opening statement','Good use of examples','Structured response','Confident tone'];
+  const improvements=['Add more specific data or examples','Vary sentence length for better flow','Slow down — pacing can improve clarity','Use stronger concluding statements'];
+  document.getElementById('feedbackArea').innerHTML=`
+    <div class="feedback-card">
+      <div class="fb-title" style="color:var(--green)">✓ Strengths</div>
+      ${strengths.slice(0,3).map(s=>`<div class="fb-item good">${s}</div>`).join('')}
+    </div>
+    <div class="feedback-card">
+      <div class="fb-title" style="color:var(--cyan)">→ Areas to Improve</div>
+      ${improvements.slice(0,3).map(s=>`<div class="fb-item">${s}</div>`).join('')}
+    </div>`;
+
+  history.unshift({type:currentSession.title,score:bounded,date:new Date().toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'}),metrics});
+  const avg=Math.round(history.reduce((a,h)=>a+h.score,0)/history.length);
+  document.getElementById('overallScore').textContent=avg;
+}
+
+// ─── HISTORY ─────────────────────────────────────────────
+function renderHistory() {
+  const el=document.getElementById('historyList');
+  if(!history.length){el.innerHTML='<div style="text-align:center;padding:3rem;color:var(--muted)">No sessions yet. Start an assessment to see your history.</div>';return;}
+  el.innerHTML=history.map(h=>`
+    <div class="hist-item">
+      <div class="hist-score">${h.score}</div>
+      <div class="hist-info">
+        <div class="hist-title">${h.type}</div>
+        <div class="hist-meta">${h.date}</div>
+      </div>
+      <div style="width:80px;height:4px;background:rgba(255,255,255,.08);border-radius:2px;overflow:hidden">
+        <div style="height:100%;width:${h.score}%;background:linear-gradient(90deg,#06b6d4,#8b5cf6);border-radius:2px"></div>
+      </div>
+    </div>`).join('');
+  const homePrev=document.getElementById('histPreview');
+  if(homePrev&&history.length){
+    homePrev.innerHTML=`<div style="margin-top:1.5rem;font-size:.8rem;color:var(--muted);text-align:center">Last session: <strong style="color:var(--primary)">${history[0].type}</strong> — Score <strong style="color:var(--cyan)">${history[0].score}/100</strong></div>`;
+  }
+}
+
+renderHistory();
+</script>
+</body>
+</html>
