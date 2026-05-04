@@ -4,76 +4,90 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Tomato — Food Delivery</title>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
 <style>
-:root{--red:#e8320a;--red2:#c42800;--org:#ff6b2b;--bg:#fff;--bg2:#f9f9f9;--bg3:#f2f2f2;--tx:#111;--mt:#666;--lt:#aaa;--br:#eee;--gr:#16a34a;--bl:#2563eb;--go:#d97706;--shadow:0 2px 16px rgba(0,0,0,.07);--shadow2:0 8px 40px rgba(0,0,0,.13);--r:14px;}
-*{margin:0;padding:0;box-sizing:border-box;} html{scroll-behavior:smooth;}
-body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--tx);overflow-x:hidden;}
-::-webkit-scrollbar{width:5px;} ::-webkit-scrollbar-thumb{background:#ddd;border-radius:3px;}
-input,button,select{font-family:inherit;}
+:root{
+  --red:#e8320a;--red2:#c42800;--org:#ff6b2b;
+  --bg:#fff;--bg2:#f8f8f8;--bg3:#f0f0f0;
+  --tx:#111;--mt:#666;--lt:#aaa;--br:#e8e8e8;
+  --gr:#16a34a;--bl:#2563eb;--go:#d97706;
+  --shadow:0 2px 16px rgba(0,0,0,.07);
+  --shadow2:0 8px 40px rgba(0,0,0,.13);
+  --r:14px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--tx);overflow-x:hidden;}
+::-webkit-scrollbar{width:5px;}::-webkit-scrollbar-thumb{background:#ddd;border-radius:3px;}
+input,button,select,textarea{font-family:inherit;}
+h1,h2,h3,h4,.logo-txt,.btn,.nav-btn,.sec-title{font-family:'Nunito',sans-serif;}
 
-/* NAV */
+/* ── NAV ── */
 .nav{position:sticky;top:0;z-index:300;background:#fff;border-bottom:1px solid var(--br);box-shadow:0 1px 8px rgba(0,0,0,.05);}
-.nav-inner{max-width:1200px;margin:0 auto;height:62px;display:flex;align-items:center;gap:1.2rem;padding:0 1.5rem;}
+.nav-inner{max-width:1200px;margin:0 auto;height:62px;display:flex;align-items:center;gap:1rem;padding:0 1.5rem;}
 .nav-logo{display:flex;align-items:center;gap:.45rem;text-decoration:none;cursor:pointer;}
 .logo-box{width:34px;height:34px;background:linear-gradient(135deg,var(--red),var(--org));border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;}
-.logo-txt{font-weight:800;font-size:1.2rem;} .logo-txt span{color:var(--red);}
+.logo-txt{font-weight:900;font-size:1.25rem;letter-spacing:-.5px;}
+.logo-txt span{color:var(--red);}
 .nav-search{flex:1;max-width:380px;position:relative;}
-.nav-search input{width:100%;padding:.5rem .9rem .5rem 2.3rem;border:1.5px solid var(--br);border-radius:999px;font-size:.85rem;background:var(--bg2);outline:none;transition:border .2s;}
+.nav-search input{width:100%;padding:.5rem .9rem .5rem 2.3rem;border:1.5px solid var(--br);border-radius:999px;font-size:.85rem;background:var(--bg2);outline:none;transition:border .2s,background .2s;}
 .nav-search input:focus{border-color:var(--red);background:#fff;}
 .ns-icon{position:absolute;left:.75rem;top:50%;transform:translateY(-50%);color:var(--lt);font-size:.85rem;}
 .nav-loc{display:flex;align-items:center;gap:.3rem;font-size:.8rem;color:var(--mt);cursor:pointer;padding:.35rem .6rem;border-radius:8px;white-space:nowrap;transition:background .2s;}
 .nav-loc:hover{background:var(--bg3);}
 .nav-right{margin-left:auto;display:flex;align-items:center;gap:.6rem;}
-.nav-btn{padding:.42rem .95rem;border-radius:8px;font-size:.8rem;font-weight:600;cursor:pointer;border:none;text-decoration:none;display:flex;align-items:center;gap:.35rem;transition:all .18s;}
+.nav-btn{padding:.42rem .95rem;border-radius:8px;font-size:.8rem;font-weight:700;cursor:pointer;border:none;text-decoration:none;display:flex;align-items:center;gap:.35rem;transition:all .18s;}
 .nb-outline{border:1.5px solid var(--br);background:transparent;color:var(--tx);}
 .nb-outline:hover{border-color:var(--red);color:var(--red);}
 .cart-fab{position:relative;background:var(--red);color:#fff;border-radius:10px;padding:.42rem .9rem;font-size:.82rem;font-weight:700;cursor:pointer;border:none;display:flex;align-items:center;gap:.4rem;transition:all .18s;}
 .cart-fab:hover{background:var(--red2);transform:translateY(-1px);box-shadow:0 4px 14px rgba(232,50,10,.3);}
 .cart-fab .cc{background:#fff;color:var(--red);width:17px;height:17px;border-radius:50%;font-size:.6rem;font-weight:800;display:flex;align-items:center;justify-content:center;}
+.wishlist-btn{width:36px;height:36px;border:1.5px solid var(--br);border-radius:9px;background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;transition:all .18s;position:relative;}
+.wishlist-btn:hover{border-color:var(--red);background:#fff5f3;}
+.wishlist-btn .wb-count{position:absolute;top:-5px;right:-5px;width:15px;height:15px;background:var(--red);color:#fff;border-radius:50%;font-size:.55rem;font-weight:800;display:flex;align-items:center;justify-content:center;}
 
-/* PAGES */
-.page{display:none;} .page.on{display:block;}
+/* ── PAGES ── */
+.page{display:none;}.page.on{display:block;}
 
-/* HERO */
+/* ── HERO ── */
 .hero{background:linear-gradient(135deg,#fff8f6 0%,#fff3ef 100%);padding:2.5rem 1.5rem;position:relative;overflow:hidden;}
 .hero::after{content:'🍅';position:absolute;right:5%;top:50%;transform:translateY(-50%);font-size:12rem;opacity:.05;pointer-events:none;}
 .hero-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 340px;gap:3rem;align-items:center;}
 .hero-chip{display:inline-flex;align-items:center;gap:.4rem;background:#fff;border:1px solid rgba(232,50,10,.2);padding:.28rem .8rem;border-radius:999px;font-size:.72rem;font-weight:700;color:var(--red);margin-bottom:.9rem;}
-.hero h1{font-size:clamp(1.9rem,3.5vw,2.8rem);font-weight:800;line-height:1.1;margin-bottom:.7rem;}
+.hero h1{font-size:clamp(1.9rem,3.5vw,2.8rem);font-weight:900;line-height:1.1;margin-bottom:.7rem;letter-spacing:-.5px;}
 .hero h1 span{color:var(--red);}
 .hero p{color:var(--mt);font-size:.95rem;line-height:1.7;max-width:420px;margin-bottom:1.8rem;}
 .hero-search-bar{display:flex;background:#fff;border:2px solid var(--br);border-radius:12px;overflow:hidden;max-width:440px;box-shadow:var(--shadow2);}
 .hero-search-bar input{flex:1;padding:.75rem 1rem;border:none;font-size:.9rem;outline:none;}
-.hero-search-bar button{padding:.75rem 1.3rem;background:var(--red);color:#fff;border:none;font-weight:700;font-size:.85rem;cursor:pointer;white-space:nowrap;}
+.hero-search-bar button{padding:.75rem 1.3rem;background:var(--red);color:#fff;border:none;font-weight:700;font-size:.85rem;cursor:pointer;white-space:nowrap;transition:background .2s;}
 .hero-search-bar button:hover{background:var(--red2);}
 .hero-img-wrap{display:flex;flex-direction:column;gap:.8rem;}
 .hero-big-img{background:linear-gradient(135deg,#fff0ec,#ffe4dc);border-radius:20px;height:220px;display:flex;align-items:center;justify-content:center;font-size:8rem;box-shadow:var(--shadow2);}
 .hero-stat-row{display:flex;gap:.6rem;}
-.hstat{background:#fff;border:1px solid var(--br);border-radius:10px;padding:.5rem .75rem;font-size:.72rem;font-weight:600;display:flex;align-items:center;gap:.3rem;box-shadow:0 1px 6px rgba(0,0,0,.06);flex:1;justify-content:center;}
+.hstat{background:#fff;border:1px solid var(--br);border-radius:10px;padding:.5rem .75rem;font-size:.72rem;font-weight:700;display:flex;align-items:center;gap:.3rem;box-shadow:0 1px 6px rgba(0,0,0,.06);flex:1;justify-content:center;}
 
-/* PROMO TICKER */
-.ticker{background:var(--red);color:#fff;padding:.55rem 0;overflow:hidden;position:relative;}
+/* ── PROMO TICKER ── */
+.ticker{background:var(--red);color:#fff;padding:.55rem 0;overflow:hidden;}
 .ticker-inner{display:flex;gap:3rem;animation:tick 22s linear infinite;width:max-content;}
 @keyframes tick{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-.ticker-item{display:flex;align-items:center;gap:.5rem;font-size:.78rem;font-weight:600;white-space:nowrap;}
+.ticker-item{display:flex;align-items:center;gap:.5rem;font-size:.78rem;font-weight:700;white-space:nowrap;}
 
-/* SECTIONS */
+/* ── SECTIONS ── */
 .sec{max-width:1200px;margin:0 auto;padding:2rem 1.5rem;}
 .sec-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.3rem;}
 .sec-title{font-size:1.25rem;font-weight:800;}
-.see-all{font-size:.8rem;font-weight:600;color:var(--red);text-decoration:none;cursor:pointer;}
+.see-all{font-size:.8rem;font-weight:700;color:var(--red);text-decoration:none;cursor:pointer;border:none;background:none;}
 
-/* CATEGORIES */
+/* ── CATEGORIES ── */
 .cat-row{display:flex;gap:.9rem;overflow-x:auto;padding-bottom:.4rem;scrollbar-width:none;}
 .cat-row::-webkit-scrollbar{display:none;}
-.cat-pill{flex-shrink:0;display:flex;align-items:center;gap:.45rem;padding:.55rem 1.1rem;border:2px solid var(--br);border-radius:999px;font-size:.82rem;font-weight:600;cursor:pointer;transition:all .2s;background:#fff;white-space:nowrap;}
+.cat-pill{flex-shrink:0;display:flex;align-items:center;gap:.45rem;padding:.55rem 1.1rem;border:2px solid var(--br);border-radius:999px;font-size:.82rem;font-weight:700;cursor:pointer;transition:all .2s;background:#fff;white-space:nowrap;}
 .cat-pill:hover,.cat-pill.on{border-color:var(--red);background:#fff5f3;color:var(--red);}
 
-/* OFFER BANNERS */
+/* ── OFFER BANNERS ── */
 .offer-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2rem;}
-.offer-card{border-radius:16px;padding:1.2rem 1.4rem;display:flex;align-items:center;justify-content:space-between;cursor:pointer;transition:transform .2s;}
-.offer-card:hover{transform:translateY(-3px);}
+.offer-card{border-radius:16px;padding:1.2rem 1.4rem;display:flex;align-items:center;justify-content:space-between;cursor:pointer;transition:transform .2s,box-shadow .2s;}
+.offer-card:hover{transform:translateY(-3px);box-shadow:var(--shadow2);}
 .offer-card.oc1{background:linear-gradient(135deg,#ffecd2,#fcb69f);}
 .offer-card.oc2{background:linear-gradient(135deg,#d4fc79,#96e6a1);}
 .offer-card.oc3{background:linear-gradient(135deg,#e0c3fc,#8ec5fc);}
@@ -81,35 +95,65 @@ input,button,select{font-family:inherit;}
 .offer-sub{font-size:.75rem;color:#444;}
 .offer-emoji{font-size:2.8rem;}
 
-/* RESTAURANT GRID */
+/* ── RESTAURANT GRID ── */
 .rest-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:1.3rem;}
-.rest-card{background:#fff;border-radius:var(--r);overflow:hidden;cursor:pointer;border:1px solid var(--br);transition:all .25s;}
+.rest-card{background:#fff;border-radius:var(--r);overflow:hidden;cursor:pointer;border:1px solid var(--br);transition:all .25s;position:relative;}
 .rest-card:hover{transform:translateY(-4px);box-shadow:var(--shadow2);border-color:rgba(232,50,10,.15);}
 .rc-img{height:155px;background:linear-gradient(135deg,#f5f5f5,#eee);display:flex;align-items:center;justify-content:center;font-size:4.5rem;position:relative;}
 .rc-disc{position:absolute;bottom:.5rem;left:.5rem;background:var(--red);color:#fff;font-size:.65rem;font-weight:700;padding:.2rem .55rem;border-radius:6px;}
 .rc-promo{position:absolute;bottom:.5rem;right:.5rem;background:#fff;color:var(--gr);font-size:.62rem;font-weight:700;padding:.18rem .5rem;border-radius:6px;border:1px solid rgba(22,163,74,.2);}
+.rc-fav{position:absolute;top:.6rem;right:.6rem;width:30px;height:30px;background:#fff;border:none;border-radius:50%;cursor:pointer;font-size:.9rem;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.1);transition:all .2s;z-index:2;}
+.rc-fav:hover{transform:scale(1.1);}
+.rc-fav.loved{background:#fff5f3;}
 .rc-body{padding:.9rem 1rem;}
-.rc-name{font-size:.95rem;font-weight:700;margin-bottom:.25rem;}
+.rc-name{font-size:.95rem;font-weight:800;margin-bottom:.25rem;}
 .rc-meta{display:flex;align-items:center;gap:.5rem;font-size:.73rem;color:var(--mt);flex-wrap:wrap;}
 .rc-rating{display:flex;align-items:center;gap:.2rem;background:#f0fdf4;color:var(--gr);padding:.12rem .4rem;border-radius:5px;font-weight:700;}
+.rc-tags{display:flex;gap:.35rem;margin-top:.4rem;flex-wrap:wrap;}
+.rc-tag{font-size:.62rem;padding:.1rem .45rem;border-radius:5px;background:var(--bg3);color:var(--mt);font-weight:600;}
 
-/* MENU PAGE */
-.menu-pg{display:none;} .menu-pg.on{display:block;}
+/* ── TRENDING / HORIZONTAL SCROLL CARDS ── */
+.scroll-row{display:flex;gap:1rem;overflow-x:auto;padding-bottom:.6rem;scrollbar-width:none;}
+.scroll-row::-webkit-scrollbar{display:none;}
+.dish-card{flex-shrink:0;width:170px;background:#fff;border:1px solid var(--br);border-radius:12px;overflow:hidden;cursor:pointer;transition:all .2s;}
+.dish-card:hover{transform:translateY(-3px);box-shadow:var(--shadow2);}
+.dc-img{height:100px;background:linear-gradient(135deg,#fff0ec,#ffe8e0);display:flex;align-items:center;justify-content:center;font-size:3rem;}
+.dc-body{padding:.6rem .8rem;}
+.dc-name{font-size:.82rem;font-weight:700;margin-bottom:.15rem;}
+.dc-rest{font-size:.7rem;color:var(--mt);}
+.dc-price{font-size:.8rem;font-weight:700;color:var(--red);margin-top:.2rem;}
+
+/* ── REVIEWS ── */
+.reviews-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;}
+.review-card{background:#fff;border:1px solid var(--br);border-radius:12px;padding:1rem 1.1rem;}
+.rv-top{display:flex;align-items:center;gap:.7rem;margin-bottom:.6rem;}
+.rv-avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;font-weight:800;color:#fff;flex-shrink:0;}
+.rv-name{font-size:.85rem;font-weight:700;}
+.rv-rest{font-size:.72rem;color:var(--mt);}
+.rv-stars{color:#f59e0b;font-size:.8rem;letter-spacing:1px;}
+.rv-text{font-size:.82rem;color:var(--mt);line-height:1.6;}
+
+/* ── MENU PAGE ── */
+.menu-pg{display:none;}.menu-pg.on{display:block;}
 .rest-banner{background:linear-gradient(135deg,#fff8f6,#ffeee8);padding:1.5rem;border-bottom:1px solid var(--br);}
 .rest-banner-inner{max-width:1200px;margin:0 auto;display:flex;gap:1.5rem;align-items:center;}
 .rb-img{width:100px;height:100px;border-radius:18px;background:#fff;box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center;font-size:3.5rem;flex-shrink:0;}
-.rb-info h1{font-size:1.5rem;font-weight:800;margin-bottom:.3rem;}
+.rb-info h1{font-size:1.5rem;font-weight:900;margin-bottom:.3rem;letter-spacing:-.3px;}
 .rb-badges{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.7rem;}
-.rb-badge{display:flex;align-items:center;gap:.3rem;background:#fff;border:1px solid var(--br);border-radius:8px;padding:.28rem .65rem;font-size:.72rem;font-weight:600;}
+.rb-badge{display:flex;align-items:center;gap:.3rem;background:#fff;border:1px solid var(--br);border-radius:8px;padding:.28rem .65rem;font-size:.72rem;font-weight:700;}
+.rb-fav-btn{margin-left:auto;display:flex;align-items:center;gap:.4rem;padding:.5rem 1rem;border:1.5px solid var(--br);border-radius:9px;background:#fff;cursor:pointer;font-size:.82rem;font-weight:700;transition:all .2s;flex-shrink:0;}
+.rb-fav-btn:hover{border-color:var(--red);color:var(--red);}
+.rb-fav-btn.loved{border-color:var(--red);color:var(--red);background:#fff5f3;}
+
 .menu-wrap{max-width:1200px;margin:0 auto;padding:1.5rem;display:grid;grid-template-columns:200px 1fr;gap:2rem;align-items:start;}
 .menu-nav{position:sticky;top:70px;background:#fff;border:1px solid var(--br);border-radius:var(--r);overflow:hidden;}
-.mn-item{padding:.75rem 1rem;font-size:.82rem;font-weight:500;cursor:pointer;transition:all .18s;border-left:3px solid transparent;color:var(--mt);}
+.mn-item{padding:.75rem 1rem;font-size:.82rem;font-weight:600;cursor:pointer;transition:all .18s;border-left:3px solid transparent;color:var(--mt);}
 .mn-item:hover{background:var(--bg2);color:var(--tx);}
-.mn-item.on{border-left-color:var(--red);background:#fff5f3;color:var(--red);font-weight:700;}
+.mn-item.on{border-left-color:var(--red);background:#fff5f3;color:var(--red);font-weight:800;}
 .menu-sec{margin-bottom:2.5rem;}
 .ms-title{font-size:1.05rem;font-weight:800;padding-bottom:.6rem;border-bottom:1px solid var(--br);margin-bottom:.9rem;}
 .items-list{display:flex;flex-direction:column;gap:.7rem;}
-.item-row{display:flex;align-items:flex-start;gap:.9rem;padding:1rem;border:1px solid var(--br);border-radius:var(--r);transition:all .2s;background:#fff;}
+.item-row{display:flex;align-items:flex-start;gap:.9rem;padding:1rem;border:1px solid var(--br);border-radius:var(--r);transition:all .2s;background:#fff;position:relative;}
 .item-row:hover{border-color:rgba(232,50,10,.2);box-shadow:0 2px 12px rgba(232,50,10,.07);}
 .ir-info{flex:1;}
 .ir-veg{width:13px;height:13px;border:1.5px solid var(--gr);border-radius:3px;display:flex;align-items:center;justify-content:center;margin-bottom:.35rem;}
@@ -117,49 +161,104 @@ input,button,select{font-family:inherit;}
 .ir-veg::after{content:'';width:5px;height:5px;border-radius:50%;background:var(--gr);}
 .ir-veg.nv::after{background:var(--red);}
 .ir-best{font-size:.62rem;font-weight:700;color:#92400e;background:#fef3c7;padding:.12rem .4rem;border-radius:4px;display:inline-block;margin-bottom:.3rem;}
-.ir-name{font-size:.9rem;font-weight:700;margin-bottom:.25rem;}
+.ir-name{font-size:.9rem;font-weight:800;margin-bottom:.25rem;}
 .ir-desc{font-size:.77rem;color:var(--mt);line-height:1.5;margin-bottom:.45rem;}
-.ir-price{font-size:.9rem;font-weight:700;}
+.ir-price{font-size:.9rem;font-weight:800;}
 .ir-img-wrap{flex-shrink:0;position:relative;}
 .ir-img{width:100px;height:76px;border-radius:10px;background:linear-gradient(135deg,#f8f0ee,#f0e0da);display:flex;align-items:center;justify-content:center;font-size:2.4rem;}
-.ir-add{position:absolute;bottom:-10px;left:50%;transform:translateX(-50%);background:#fff;border:1.5px solid var(--red);color:var(--red);border-radius:8px;padding:.26rem .85rem;font-size:.75rem;font-weight:700;cursor:pointer;white-space:nowrap;transition:all .18s;}
+.ir-add{position:absolute;bottom:-10px;left:50%;transform:translateX(-50%);background:#fff;border:1.5px solid var(--red);color:var(--red);border-radius:8px;padding:.26rem .85rem;font-size:.75rem;font-weight:800;cursor:pointer;white-space:nowrap;transition:all .18s;}
 .ir-add:hover{background:var(--red);color:#fff;}
 .ir-qty{position:absolute;bottom:-10px;left:50%;transform:translateX(-50%);display:flex;align-items:center;border:1.5px solid var(--red);border-radius:8px;overflow:hidden;background:#fff;}
 .iq-btn{width:26px;height:26px;border:none;background:transparent;cursor:pointer;font-weight:700;color:var(--red);font-size:.95rem;display:flex;align-items:center;justify-content:center;}
 .iq-btn:hover{background:#fff5f3;}
 .iq-n{min-width:22px;text-align:center;font-size:.8rem;font-weight:700;}
+.item-fav{position:absolute;top:.7rem;right:.7rem;background:none;border:none;cursor:pointer;font-size:.9rem;opacity:.4;transition:opacity .2s;}
+.item-fav:hover,.item-fav.on{opacity:1;}
 
-/* CART SLIDE */
+/* ── MENU FILTER BAR ── */
+.menu-filter-bar{max-width:1200px;margin:0 auto;padding:.8rem 1.5rem;display:flex;gap:.6rem;overflow-x:auto;border-bottom:1px solid var(--br);background:#fff;position:sticky;top:62px;z-index:100;}
+.menu-filter-bar::-webkit-scrollbar{display:none;}
+.mf-pill{flex-shrink:0;padding:.35rem .9rem;border:1.5px solid var(--br);border-radius:999px;font-size:.78rem;font-weight:700;cursor:pointer;transition:all .18s;background:#fff;white-space:nowrap;color:var(--mt);}
+.mf-pill:hover,.mf-pill.on{border-color:var(--red);background:#fff5f3;color:var(--red);}
+
+/* ── CART SLIDE ── */
 .cart-overlay{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:500;display:none;backdrop-filter:blur(2px);}
 .cart-overlay.on{display:block;}
-.cart-panel{position:fixed;right:0;top:0;bottom:0;width:370px;background:#fff;z-index:501;transform:translateX(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;box-shadow:-6px 0 40px rgba(0,0,0,.12);}
+.cart-panel{position:fixed;right:0;top:0;bottom:0;width:375px;background:#fff;z-index:501;transform:translateX(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;box-shadow:-6px 0 40px rgba(0,0,0,.12);}
 .cart-panel.on{transform:none;}
 .cp-head{padding:1.1rem 1.3rem;border-bottom:1px solid var(--br);display:flex;align-items:center;justify-content:space-between;}
-.cp-head h3{font-size:.95rem;font-weight:800;} .cp-rname{font-size:.74rem;color:var(--mt);}
+.cp-head h3{font-size:.95rem;font-weight:800;}.cp-rname{font-size:.74rem;color:var(--mt);}
 .cp-close{background:none;border:none;cursor:pointer;font-size:1.1rem;color:var(--mt);}
 .cp-body{flex:1;overflow-y:auto;padding:1rem 1.3rem;}
 .cp-empty{text-align:center;padding:3rem 1rem;}
 .cp-empty-ic{font-size:3.5rem;margin-bottom:.8rem;}
 .cart-item{display:flex;align-items:center;gap:.9rem;padding:.8rem 0;border-bottom:1px solid var(--br);}
 .ci-img{width:50px;height:42px;border-radius:9px;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;}
-.ci-info{flex:1;} .ci-name{font-size:.85rem;font-weight:600;margin-bottom:.12rem;} .ci-price{font-size:.78rem;color:var(--mt);}
+.ci-info{flex:1;}.ci-name{font-size:.85rem;font-weight:700;margin-bottom:.12rem;}.ci-price{font-size:.78rem;color:var(--mt);}
 .ci-ctrl{display:flex;align-items:center;border:1.5px solid var(--red);border-radius:7px;overflow:hidden;}
 .cib{width:26px;height:26px;border:none;background:transparent;cursor:pointer;font-weight:700;color:var(--red);font-size:.9rem;}
 .cib:hover{background:#fff5f3;}
 .cin{min-width:24px;text-align:center;font-size:.8rem;font-weight:700;}
 .cp-foot{padding:1.1rem 1.3rem;border-top:1px solid var(--br);}
 .promo-bar{display:flex;gap:.5rem;margin-bottom:.9rem;}
-.promo-bar input{flex:1;padding:.48rem .75rem;border:1.5px solid var(--br);border-radius:8px;font-size:.82rem;outline:none;}
+.promo-bar input{flex:1;padding:.48rem .75rem;border:1.5px solid var(--br);border-radius:8px;font-size:.82rem;outline:none;transition:border .2s;}
 .promo-bar input:focus{border-color:var(--red);}
-.promo-bar button{padding:.48rem .85rem;background:var(--bg3);border:none;border-radius:8px;font-size:.76rem;font-weight:600;cursor:pointer;}
+.promo-bar button{padding:.48rem .85rem;background:var(--bg3);border:none;border-radius:8px;font-size:.76rem;font-weight:700;cursor:pointer;transition:all .2s;}
 .promo-bar button:hover{background:var(--red);color:#fff;}
 .cart-bill{margin-bottom:.9rem;}
 .cb-row{display:flex;justify-content:space-between;font-size:.82rem;color:var(--mt);margin-bottom:.35rem;}
-.cb-row.total{color:var(--tx);font-weight:700;font-size:.92rem;border-top:1px solid var(--br);padding-top:.5rem;margin-top:.35rem;}
-.checkout-btn{width:100%;padding:.82rem;background:var(--red);color:#fff;border:none;border-radius:12px;font-size:.9rem;font-weight:700;cursor:pointer;transition:background .2s;}
-.checkout-btn:hover{background:var(--red2);}
+.cb-row.total{color:var(--tx);font-weight:800;font-size:.92rem;border-top:1px solid var(--br);padding-top:.5rem;margin-top:.35rem;}
+.checkout-btn{width:100%;padding:.82rem;background:linear-gradient(135deg,var(--red),var(--org));color:#fff;border:none;border-radius:12px;font-size:.9rem;font-weight:800;cursor:pointer;transition:all .2s;}
+.checkout-btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(232,50,10,.3);}
+.cp-note{display:flex;gap:.5rem;background:#f0fdf4;border-radius:8px;padding:.5rem .75rem;margin-bottom:.8rem;font-size:.75rem;color:var(--gr);font-weight:600;}
 
-/* CHECKOUT MODAL */
+/* ── WISHLIST PAGE ── */
+.wishlist-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:1.3rem;}
+.wl-empty{text-align:center;padding:4rem 1rem;}
+.wl-empty-ic{font-size:4rem;margin-bottom:1rem;}
+
+/* ── ORDERS PAGE ── */
+.orders-list{display:flex;flex-direction:column;gap:1rem;}
+.order-card{background:#fff;border:1px solid var(--br);border-radius:var(--r);padding:1.1rem 1.3rem;cursor:pointer;transition:all .2s;}
+.order-card:hover{border-color:rgba(232,50,10,.2);box-shadow:var(--shadow);}
+.oc-top{display:flex;align-items:center;gap:1rem;margin-bottom:.7rem;}
+.oc-emoji{width:44px;height:44px;background:var(--bg2);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;}
+.oc-name{font-size:.92rem;font-weight:800;}
+.oc-date{font-size:.73rem;color:var(--mt);}
+.oc-status{margin-left:auto;font-size:.72rem;font-weight:700;padding:.2rem .6rem;border-radius:999px;}
+.ocs-del{background:#f0fdf4;color:var(--gr);}
+.ocs-can{background:#fef2f2;color:#dc2626;}
+.oc-items{font-size:.8rem;color:var(--mt);margin-bottom:.6rem;}
+.oc-bottom{display:flex;align-items:center;justify-content:space-between;}
+.oc-total{font-size:.88rem;font-weight:800;}
+.oc-reorder{padding:.38rem .9rem;background:var(--red);color:#fff;border:none;border-radius:8px;font-size:.76rem;font-weight:700;cursor:pointer;transition:all .18s;}
+.oc-reorder:hover{background:var(--red2);}
+
+/* ── PROFILE PAGE ── */
+.profile-wrap{max-width:600px;margin:0 auto;padding:2rem 1.5rem;}
+.profile-header{display:flex;align-items:center;gap:1.2rem;background:linear-gradient(135deg,#fff8f6,#ffeee8);padding:1.5rem;border-radius:16px;margin-bottom:1.5rem;}
+.ph-avatar{width:68px;height:68px;background:linear-gradient(135deg,var(--red),var(--org));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.8rem;font-weight:900;color:#fff;flex-shrink:0;}
+.ph-name{font-size:1.2rem;font-weight:900;}
+.ph-email{font-size:.82rem;color:var(--mt);}
+.ph-edit{margin-left:auto;padding:.4rem .9rem;border:1.5px solid var(--br);border-radius:8px;background:#fff;cursor:pointer;font-size:.78rem;font-weight:700;transition:all .2s;}
+.ph-edit:hover{border-color:var(--red);color:var(--red);}
+.profile-section{background:#fff;border:1px solid var(--br);border-radius:var(--r);margin-bottom:1rem;overflow:hidden;}
+.ps-title{padding:.85rem 1.2rem;border-bottom:1px solid var(--br);font-size:.82rem;font-weight:800;color:var(--mt);text-transform:uppercase;letter-spacing:.06em;}
+.ps-item{display:flex;align-items:center;gap:.9rem;padding:.85rem 1.2rem;border-bottom:1px solid var(--br);cursor:pointer;transition:background .18s;}
+.ps-item:last-child{border-bottom:none;}
+.ps-item:hover{background:var(--bg2);}
+.ps-icon{font-size:1.1rem;width:24px;text-align:center;}
+.ps-label{flex:1;font-size:.88rem;font-weight:600;}
+.ps-value{font-size:.8rem;color:var(--mt);}
+.ps-arrow{color:var(--lt);font-size:.8rem;}
+.tomato-pro-banner{background:linear-gradient(135deg,#1a1a2e,#16213e);border-radius:14px;padding:1.2rem 1.5rem;display:flex;align-items:center;gap:1rem;margin-bottom:1rem;cursor:pointer;transition:transform .2s;}
+.tomato-pro-banner:hover{transform:translateY(-2px);}
+.tpb-icon{font-size:2rem;}
+.tpb-title{font-size:1rem;font-weight:900;color:#fff;}
+.tpb-sub{font-size:.78rem;color:#aaa;}
+.tpb-btn{margin-left:auto;padding:.4rem 1rem;background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff;border:none;border-radius:8px;font-size:.78rem;font-weight:800;cursor:pointer;white-space:nowrap;}
+
+/* ── CHECKOUT MODAL ── */
 .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:600;display:none;align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(4px);}
 .modal-bg.on{display:flex;}
 .modal{background:#fff;border-radius:20px;width:100%;max-width:540px;max-height:92vh;overflow-y:auto;position:relative;}
@@ -168,82 +267,65 @@ input,button,select{font-family:inherit;}
 .modal-body{padding:1.3rem 1.5rem;}
 .mclose{background:none;border:none;font-size:1rem;cursor:pointer;color:var(--mt);width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;transition:background .18s;}
 .mclose:hover{background:var(--bg3);}
-/* Steps */
 .steps-bar{display:flex;gap:.3rem;margin-bottom:1.5rem;}
 .step-dot{flex:1;height:3px;border-radius:2px;background:var(--br);}
 .step-dot.done{background:var(--red);}
 .step-dot.cur{background:var(--org);}
-/* Form */
 .fg{margin-bottom:.85rem;}
-.fg label{font-size:.72rem;font-weight:700;color:var(--mt);display:block;margin-bottom:.32rem;text-transform:uppercase;letter-spacing:.04em;}
-.fg input,.fg select{width:100%;padding:.58rem .85rem;border:1.5px solid var(--br);border-radius:9px;font-size:.88rem;font-family:inherit;color:var(--tx);outline:none;background:#fff;transition:border .18s;}
-.fg input:focus,.fg select:focus{border-color:var(--red);}
+.fg label{font-size:.72rem;font-weight:800;color:var(--mt);display:block;margin-bottom:.32rem;text-transform:uppercase;letter-spacing:.04em;}
+.fg input,.fg select,.fg textarea{width:100%;padding:.58rem .85rem;border:1.5px solid var(--br);border-radius:9px;font-size:.88rem;font-family:inherit;color:var(--tx);outline:none;background:#fff;transition:border .18s;}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--red);}
 .fg-row{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;}
-/* Address cards */
 .addr-list{display:flex;flex-direction:column;gap:.55rem;margin-bottom:1rem;}
 .addr-card{padding:.85rem 1rem;border:1.5px solid var(--br);border-radius:10px;cursor:pointer;display:flex;gap:.7rem;transition:all .18s;}
 .addr-card:hover,.addr-card.sel{border-color:var(--red);background:#fff8f6;}
 .ac-icon{font-size:1.2rem;margin-top:.1rem;}
 .ac-text{font-size:.83rem;line-height:1.55;}
-.ac-label{font-weight:700;font-size:.78rem;margin-bottom:.15rem;}
-/* Pay methods */
+.ac-label{font-weight:800;font-size:.78rem;margin-bottom:.15rem;}
 .pay-list{display:flex;flex-direction:column;gap:.55rem;margin-bottom:1.1rem;}
 .pay-card{padding:.85rem 1rem;border:1.5px solid var(--br);border-radius:10px;cursor:pointer;display:flex;align-items:center;gap:.85rem;transition:all .18s;}
 .pay-card:hover,.pay-card.sel{border-color:var(--red);background:#fff8f6;}
 .pc-icon{font-size:1.5rem;}
-.pc-info{flex:1;} .pc-name{font-size:.87rem;font-weight:700;} .pc-sub{font-size:.72rem;color:var(--mt);}
+.pc-info{flex:1;}.pc-name{font-size:.87rem;font-weight:700;}.pc-sub{font-size:.72rem;color:var(--mt);}
 .pc-radio{width:16px;height:16px;border-radius:50%;border:1.5px solid var(--br);transition:all .18s;flex-shrink:0;}
 .pay-card.sel .pc-radio{border-color:var(--red);background:var(--red);box-shadow:0 0 0 3px rgba(232,50,10,.18);}
-/* UPI inline */
-.upi-inline{padding:.7rem;background:var(--bg2);border-radius:9px;margin-top:.6rem;display:none;}
-.upi-inline.on{display:block;}
-.upi-inline input{width:100%;padding:.5rem .8rem;border:1.5px solid var(--br);border-radius:8px;font-size:.85rem;outline:none;}
-.upi-inline input:focus{border-color:var(--red);}
-/* Card inline */
-.card-inline{padding:.7rem;background:var(--bg2);border-radius:9px;margin-top:.6rem;display:none;}
-.card-inline.on{display:block;}
-/* Order summary box */
 .os-box{background:var(--bg2);border-radius:12px;padding:.95rem 1.1rem;margin-bottom:1.1rem;}
 .os-row{display:flex;justify-content:space-between;font-size:.82rem;color:var(--mt);margin-bottom:.35rem;}
-.os-row.total{color:var(--tx);font-weight:700;font-size:.92rem;border-top:1px solid #ddd;padding-top:.5rem;margin-top:.35rem;}
-/* PAY BUTTON */
-.pay-now-btn{width:100%;padding:.85rem;border:none;border-radius:12px;font-size:.92rem;font-weight:700;cursor:pointer;background:linear-gradient(135deg,var(--red),var(--org));color:#fff;transition:all .22s;display:flex;align-items:center;justify-content:center;gap:.5rem;}
+.os-row.total{color:var(--tx);font-weight:800;font-size:.92rem;border-top:1px solid #ddd;padding-top:.5rem;margin-top:.35rem;}
+.pay-now-btn{width:100%;padding:.85rem;border:none;border-radius:12px;font-size:.92rem;font-weight:800;cursor:pointer;background:linear-gradient(135deg,var(--red),var(--org));color:#fff;transition:all .22s;display:flex;align-items:center;justify-content:center;gap:.5rem;}
 .pay-now-btn:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(232,50,10,.3);}
-.sec-badge{font-size:.7rem;background:rgba(22,163,74,.1);color:var(--gr);border:1px solid rgba(22,163,74,.2);padding:.2rem .55rem;border-radius:999px;font-weight:600;}
-/* Razorpay-style payment window */
+
+/* ── RAZORPAY MODAL ── */
 .rzp-modal{position:fixed;inset:0;z-index:800;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;backdrop-filter:blur(6px);}
 .rzp-modal.on{display:flex;}
 .rzp-box{background:#fff;border-radius:18px;width:100%;max-width:440px;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,.25);}
 .rzp-header{background:linear-gradient(135deg,#528FF0,#1a56db);padding:1.2rem 1.5rem;display:flex;align-items:center;gap:.8rem;}
 .rzp-logo{font-size:1.4rem;}
-.rzp-header-info h4{color:#fff;font-size:1rem;font-weight:700;}
+.rzp-header-info h4{color:#fff;font-size:1rem;font-weight:800;}
 .rzp-header-info p{color:rgba(255,255,255,.75);font-size:.78rem;}
-.rzp-amount{color:#fff;font-size:1.3rem;font-weight:800;margin-left:auto;}
+.rzp-amount{color:#fff;font-size:1.3rem;font-weight:900;margin-left:auto;}
 .rzp-body{padding:1.4rem 1.5rem;}
 .rzp-tabs{display:flex;border-bottom:2px solid var(--br);margin-bottom:1.2rem;}
-.rzp-tab{flex:1;padding:.5rem;text-align:center;font-size:.78rem;font-weight:600;cursor:pointer;color:var(--mt);border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .18s;}
+.rzp-tab{flex:1;padding:.5rem;text-align:center;font-size:.78rem;font-weight:700;cursor:pointer;color:var(--mt);border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .18s;}
 .rzp-tab.on{color:#1a56db;border-bottom-color:#1a56db;}
-.rzp-tab-content{display:none;} .rzp-tab-content.on{display:block;}
+.rzp-tab-content{display:none;}.rzp-tab-content.on{display:block;}
 .rzp-input{width:100%;padding:.6rem .9rem;border:1.5px solid var(--br);border-radius:9px;font-size:.9rem;margin-bottom:.7rem;outline:none;font-family:inherit;transition:border .18s;}
 .rzp-input:focus{border-color:#1a56db;}
 .rzp-row{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;}
 .rzp-upi-apps{display:flex;gap:.6rem;margin-bottom:.9rem;}
-.rzp-app{flex:1;display:flex;flex-direction:column;align-items:center;gap:.3rem;padding:.6rem;border:1.5px solid var(--br);border-radius:10px;cursor:pointer;transition:all .18s;font-size:.7rem;font-weight:600;}
+.rzp-app{flex:1;display:flex;flex-direction:column;align-items:center;gap:.3rem;padding:.6rem;border:1.5px solid var(--br);border-radius:10px;cursor:pointer;transition:all .18s;font-size:.7rem;font-weight:700;}
 .rzp-app:hover{border-color:#1a56db;background:#f0f4ff;}
 .rzp-app .ra-icon{font-size:1.6rem;}
-.rzp-pay-btn{width:100%;padding:.82rem;background:#1a56db;color:#fff;border:none;border-radius:12px;font-size:.9rem;font-weight:700;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:.5rem;margin-top:.5rem;}
+.rzp-pay-btn{width:100%;padding:.82rem;background:#1a56db;color:#fff;border:none;border-radius:12px;font-size:.9rem;font-weight:800;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:.5rem;margin-top:.5rem;}
 .rzp-pay-btn:hover{background:#1445bb;}
 .rzp-secure{text-align:center;font-size:.7rem;color:var(--lt);margin-top:.7rem;display:flex;align-items:center;justify-content:center;gap:.3rem;}
-.rzp-back{background:none;border:none;color:var(--mt);font-size:.8rem;cursor:pointer;display:flex;align-items:center;gap:.3rem;margin-bottom:1rem;font-family:inherit;}
-/* Processing */
+.rzp-back{background:none;border:none;color:var(--mt);font-size:.8rem;cursor:pointer;display:flex;align-items:center;gap:.3rem;margin-bottom:1rem;font-family:inherit;font-weight:600;}
 .pay-processing{text-align:center;padding:2rem;}
 .pay-spin{width:56px;height:56px;border:3px solid #e5e5ff;border-top-color:#1a56db;border-radius:50%;margin:0 auto 1rem;animation:spin .7s linear infinite;}
 @keyframes spin{to{transform:rotate(360deg)}}
-/* Success */
 .pay-success{text-align:center;padding:1.5rem;}
 .success-circle{width:72px;height:72px;background:linear-gradient(135deg,var(--gr),#4ade80);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2rem;margin:0 auto 1rem;animation:popIn .5s cubic-bezier(.2,1.5,.5,1);}
 @keyframes popIn{0%{transform:scale(0)}100%{transform:scale(1)}}
-/* Tracking */
 .track-steps{display:flex;flex-direction:column;gap:0;margin:1.2rem 0;}
 .ts{display:flex;gap:.9rem;align-items:flex-start;padding:.65rem 0;position:relative;}
 .ts-line{position:absolute;left:17px;top:40px;width:2px;height:calc(100% - 5px);background:var(--br);}
@@ -253,34 +335,77 @@ input,button,select{font-family:inherit;}
 .ts.cur .ts-icon{background:var(--org);border-color:var(--org);color:#fff;animation:glow 1.5s ease-in-out infinite;}
 @keyframes glow{0%,100%{box-shadow:0 0 0 0 rgba(255,107,43,.4)}50%{box-shadow:0 0 0 8px rgba(255,107,43,0)}}
 .ts.pend .ts-icon{background:var(--bg3);color:var(--lt);}
-.ts-info{flex:1;} .ts-name{font-size:.85rem;font-weight:700;} .ts-time{font-size:.72rem;color:var(--mt);}
-.mback-btn{width:100%;padding:.75rem;background:transparent;border:1.5px solid var(--br);border-radius:12px;font-size:.85rem;font-weight:600;cursor:pointer;margin-top:.6rem;}
+.ts-info{flex:1;}.ts-name{font-size:.85rem;font-weight:800;}.ts-time{font-size:.72rem;color:var(--mt);}
+.mback-btn{width:100%;padding:.75rem;background:transparent;border:1.5px solid var(--br);border-radius:12px;font-size:.85rem;font-weight:700;cursor:pointer;margin-top:.6rem;transition:all .2s;}
 .mback-btn:hover{border-color:var(--red);color:var(--red);}
 
-/* TOAST */
-.toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%) translateY(70px);background:#111;color:#fff;padding:.65rem 1.2rem;border-radius:999px;font-size:.82rem;font-weight:500;z-index:1000;transition:all .3s;opacity:0;white-space:nowrap;}
+/* ── RATING MODAL ── */
+.rate-stars{display:flex;gap:.5rem;justify-content:center;margin:1rem 0;}
+.rate-star{font-size:2rem;cursor:pointer;transition:transform .15s;opacity:.3;}
+.rate-star.on,.rate-star:hover{opacity:1;transform:scale(1.15);}
+
+/* ── BOTTOM NAV (mobile) ── */
+.bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--br);z-index:200;padding:.4rem 0;}
+.bn-inner{display:flex;justify-content:space-around;}
+.bn-item{display:flex;flex-direction:column;align-items:center;gap:.15rem;padding:.4rem .8rem;cursor:pointer;border:none;background:none;font-size:.6rem;font-weight:700;color:var(--lt);font-family:inherit;transition:color .18s;position:relative;}
+.bn-item.on{color:var(--red);}
+.bn-item .bn-icon{font-size:1.25rem;}
+.bn-badge{position:absolute;top:2px;right:10px;width:14px;height:14px;background:var(--red);color:#fff;border-radius:50%;font-size:.55rem;font-weight:800;display:flex;align-items:center;justify-content:center;}
+
+/* ── TOAST ── */
+.toast{position:fixed;bottom:5rem;left:50%;transform:translateX(-50%) translateY(70px);background:#111;color:#fff;padding:.65rem 1.2rem;border-radius:999px;font-size:.82rem;font-weight:600;z-index:1000;transition:all .3s;opacity:0;white-space:nowrap;}
 .toast.on{transform:translateX(-50%) translateY(0);opacity:1;}
-/* FLOAT CART */
-.float-cart{position:fixed;bottom:1.5rem;right:1.5rem;background:var(--red);color:#fff;border:none;border-radius:14px;padding:.75rem 1.3rem;font-size:.85rem;font-weight:700;cursor:pointer;display:none;align-items:center;gap:.6rem;box-shadow:0 6px 22px rgba(232,50,10,.35);z-index:299;transition:all .2s;}
+
+/* ── FLOAT CART ── */
+.float-cart{position:fixed;bottom:5rem;right:1.5rem;background:var(--red);color:#fff;border:none;border-radius:14px;padding:.75rem 1.3rem;font-size:.85rem;font-weight:800;cursor:pointer;display:none;align-items:center;gap:.6rem;box-shadow:0 6px 22px rgba(232,50,10,.35);z-index:299;transition:all .2s;}
 .float-cart.on{display:flex;}
 .float-cart:hover{background:var(--red2);transform:translateY(-2px);}
 
-/* FOOTER */
+/* ── FOOTER ── */
 .footer{background:#0f0f0f;color:#fff;padding:2.5rem 1.5rem 1.5rem;margin-top:3rem;}
 .footer-inner{max-width:1200px;margin:0 auto;}
 .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2.5rem;margin-bottom:2rem;}
-.f-logo{font-size:1.3rem;font-weight:800;margin-bottom:.5rem;} .f-logo span{color:var(--red);}
+.f-logo{font-size:1.3rem;font-weight:900;margin-bottom:.5rem;letter-spacing:-.3px;}.f-logo span{color:var(--red);}
 .f-desc{color:#888;font-size:.82rem;line-height:1.7;}
-.f-col h4{font-size:.74rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#666;margin-bottom:.9rem;}
-.f-col a{display:block;color:#bbb;font-size:.82rem;text-decoration:none;margin-bottom:.4rem;transition:color .18s;}
+.f-col h4{font-size:.74rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#666;margin-bottom:.9rem;}
+.f-col a{display:block;color:#bbb;font-size:.82rem;text-decoration:none;margin-bottom:.4rem;transition:color .18s;cursor:pointer;}
 .f-col a:hover{color:#fff;}
-.footer-bottom{border-top:1px solid #222;padding-top:1.2rem;display:flex;justify-content:space-between;font-size:.75rem;color:#555;}
+.footer-bottom{border-top:1px solid #222;padding-top:1.2rem;display:flex;justify-content:space-between;font-size:.75rem;color:#555;flex-wrap:wrap;gap:.5rem;}
+.app-badges{display:flex;gap:.6rem;margin-top:.8rem;}
+.app-badge{display:flex;align-items:center;gap:.4rem;background:#1a1a1a;border:1px solid #333;border-radius:8px;padding:.4rem .8rem;font-size:.72rem;color:#ccc;cursor:pointer;transition:all .2s;}
+.app-badge:hover{border-color:#555;color:#fff;}
+
+/* ── SEARCH RESULTS ── */
+.search-results{position:absolute;top:calc(100% + 4px);left:0;right:0;background:#fff;border:1.5px solid var(--br);border-radius:12px;box-shadow:var(--shadow2);z-index:400;max-height:320px;overflow-y:auto;display:none;}
+.search-results.on{display:block;}
+.sr-item{display:flex;align-items:center;gap:.8rem;padding:.7rem 1rem;cursor:pointer;transition:background .18s;}
+.sr-item:hover{background:var(--bg2);}
+.sr-icon{font-size:1.5rem;width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:var(--bg2);border-radius:8px;}
+.sr-name{font-size:.85rem;font-weight:700;}
+.sr-sub{font-size:.72rem;color:var(--mt);}
+.sr-empty{padding:1.2rem;text-align:center;color:var(--mt);font-size:.85rem;}
+
+/* ── SKELETON LOADER ── */
+.skeleton{background:linear-gradient(90deg,#f0f0f0 25%,#e0e0e0 50%,#f0f0f0 75%);background-size:200% 100%;animation:shimmer 1.2s infinite;}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+.skel-card{border-radius:var(--r);overflow:hidden;border:1px solid var(--br);}
+.skel-img{height:155px;}
+.skel-body{padding:.9rem 1rem;}
+.skel-line{height:14px;border-radius:7px;margin-bottom:.5rem;}
+.skel-line.sm{width:60%;}
+
+/* ── BACK BUTTON ── */
+.back-btn{display:flex;align-items:center;gap:.4rem;background:none;border:none;cursor:pointer;font-size:.88rem;font-weight:700;color:var(--mt);padding:.5rem 1.5rem;margin-top:.5rem;font-family:inherit;transition:color .18s;}
+.back-btn:hover{color:var(--red);}
+
 @media(max-width:900px){
   .hero-inner,.menu-wrap,.footer-grid{grid-template-columns:1fr;}
   .hero-img-wrap{display:none;}
   .menu-nav{display:none;}
   .offer-grid{grid-template-columns:1fr 1fr;}
   .footer-grid{grid-template-columns:1fr 1fr;}
+  .bottom-nav{display:block;}
+  body{padding-bottom:60px;}
 }
 @media(max-width:580px){
   .nav-loc,.nb-outline{display:none;}
@@ -288,23 +413,26 @@ input,button,select{font-family:inherit;}
   .rzp-row,.fg-row{grid-template-columns:1fr;}
   .offer-grid{grid-template-columns:1fr;}
   .footer-grid{grid-template-columns:1fr;}
+  .reviews-grid{grid-template-columns:1fr;}
 }
 </style>
 </head>
 <body>
+
 <div class="toast" id="toast"></div>
 <button class="float-cart" id="fcart" onclick="openCart()">🛒 Cart · <span id="ftotal">₹0</span></button>
 <div class="cart-overlay" id="cOverlay" onclick="closeCart()"></div>
 
-<!-- CART -->
+<!-- CART PANEL -->
 <div class="cart-panel" id="cPanel">
   <div class="cp-head">
-    <div><h3>Your Cart</h3><div class="cp-rname" id="cpRname"></div></div>
+    <div><h3>Your Cart 🛒</h3><div class="cp-rname" id="cpRname"></div></div>
     <button class="cp-close" onclick="closeCart()">✕</button>
   </div>
   <div class="cp-body" id="cpBody"></div>
   <div class="cp-foot" id="cpFoot" style="display:none">
-    <div class="promo-bar"><input id="promoIn" placeholder="Promo code"/><button onclick="applyPromo()">Apply</button></div>
+    <div class="cp-note" id="cpNote"></div>
+    <div class="promo-bar"><input id="promoIn" placeholder="Enter promo code"/><button onclick="applyPromo()">Apply</button></div>
     <div class="cart-bill" id="cartBill"></div>
     <button class="checkout-btn" onclick="openCheckout()">Proceed to Checkout →</button>
   </div>
@@ -330,26 +458,36 @@ input,button,select{font-family:inherit;}
   </div>
 </div>
 
+<!-- RATING MODAL -->
+<div class="modal-bg" id="rateModal">
+  <div class="modal">
+    <div class="modal-head"><h3>Rate your order 🌟</h3><button class="mclose" onclick="closeRateModal()">✕</button></div>
+    <div class="modal-body" id="rateBody"></div>
+  </div>
+</div>
+
 <!-- NAV -->
 <nav class="nav">
   <div class="nav-inner">
-    <a class="nav-logo" onclick="goHome()">
+    <a class="nav-logo" onclick="showPage('home')">
       <div class="logo-box">🍅</div>
       <div class="logo-txt">tom<span>ato</span></div>
     </a>
-    <div class="nav-search">
+    <div class="nav-search" id="navSearchWrap">
       <span class="ns-icon">🔍</span>
-      <input id="nsearch" placeholder="Search restaurants, dishes..." oninput="filterRests()"/>
+      <input id="nsearch" placeholder="Search restaurants or dishes..." oninput="handleSearch()" onfocus="showSearchDrop()" onblur="hideSearchDropDelay()"/>
+      <div class="search-results" id="searchDrop"></div>
     </div>
-    <div class="nav-loc" onclick="toast('📍 Ghaziabad, UP')">📍 Ghaziabad ▾</div>
+    <div class="nav-loc" onclick="toast('📍 Ghaziabad, UP — Change coming soon!')">📍 Ghaziabad ▾</div>
     <div class="nav-right">
-      <button class="nav-btn nb-outline" onclick="toast('👤 Login feature coming soon!')">Sign In</button>
+      <button class="wishlist-btn" onclick="showPage('wishlist')" title="Wishlist">❤️<span class="wb-count" id="wbCount" style="display:none">0</span></button>
+      <button class="nav-btn nb-outline" onclick="showPage('profile')">👤 Profile</button>
       <button class="cart-fab" onclick="openCart()">🛒 Cart <span class="cc" id="ccount">0</span></button>
     </div>
   </div>
 </nav>
 
-<!-- HOME PAGE -->
+<!-- ═══ HOME PAGE ═══ -->
 <div class="page on" id="homePg">
   <div class="hero">
     <div class="hero-inner">
@@ -358,8 +496,8 @@ input,button,select{font-family:inherit;}
         <h1>Hungry?<br/>Order <span>great food</span> fast</h1>
         <p>Ghaziabad's best restaurants, delivered hot & fresh in under 30 minutes.</p>
         <div class="hero-search-bar">
-          <input placeholder="Search 'Biryani', 'Pizza', 'Burgers'..."/>
-          <button onclick="toast('🔍 Showing results!')">Search</button>
+          <input placeholder="Search 'Biryani', 'Pizza', 'Burgers'..." id="heroSearch" oninput="heroSearchFn()"/>
+          <button onclick="heroSearchFn()">Search</button>
         </div>
       </div>
       <div class="hero-img-wrap">
@@ -372,11 +510,7 @@ input,button,select{font-family:inherit;}
       </div>
     </div>
   </div>
-
-  <!-- PROMO TICKER -->
-  <div class="ticker">
-    <div class="ticker-inner" id="ticker"></div>
-  </div>
+  <div class="ticker"><div class="ticker-inner" id="ticker"></div></div>
 
   <!-- CATEGORIES -->
   <div class="sec">
@@ -387,21 +521,36 @@ input,button,select{font-family:inherit;}
   <!-- OFFER BANNERS -->
   <div class="sec" style="padding-top:0">
     <div class="offer-grid">
-      <div class="offer-card oc1"><div><div class="offer-title">50% OFF</div><div class="offer-sub">Use code TOMATO50<br/>Max discount ₹100</div></div><div class="offer-emoji">🎉</div></div>
-      <div class="offer-card oc2"><div><div class="offer-title">Free Delivery</div><div class="offer-sub">On orders above ₹299<br/>All restaurants</div></div><div class="offer-emoji">🛵</div></div>
-      <div class="offer-card oc3"><div><div class="offer-title">Pro Membership</div><div class="offer-sub">Unlimited free delivery<br/>@₹149/month</div></div><div class="offer-emoji">👑</div></div>
+      <div class="offer-card oc1" onclick="applyPromoCode('TOMATO50')"><div><div class="offer-title">50% OFF</div><div class="offer-sub">Use code TOMATO50<br/>Max discount ₹100</div></div><div class="offer-emoji">🎉</div></div>
+      <div class="offer-card oc2" onclick="toast('🛵 Free delivery on orders above ₹299!')"><div><div class="offer-title">Free Delivery</div><div class="offer-sub">On orders above ₹299<br/>All restaurants</div></div><div class="offer-emoji">🛵</div></div>
+      <div class="offer-card oc3" onclick="toast('👑 Tomato Pro — ₹149/month. Coming soon!')"><div><div class="offer-title">Pro Membership</div><div class="offer-sub">Unlimited free delivery<br/>@₹149/month</div></div><div class="offer-emoji">👑</div></div>
     </div>
+  </div>
+
+  <!-- TRENDING DISHES -->
+  <div class="sec" style="padding-top:0">
+    <div class="sec-head"><div class="sec-title">🔥 Trending Dishes</div><button class="see-all" onclick="toast('See all trending dishes!')">See all →</button></div>
+    <div class="scroll-row" id="trendRow"></div>
   </div>
 
   <!-- RESTAURANTS -->
   <div class="sec" style="padding-top:0">
-    <div class="sec-head"><div class="sec-title" id="restHd">Top Restaurants</div><a class="see-all">See all →</a></div>
+    <div class="sec-head"><div class="sec-title" id="restHd">Top Restaurants</div><button class="see-all" onclick="toast('Showing all restaurants!')">See all →</button></div>
+    <!-- FILTER CHIPS -->
+    <div style="display:flex;gap:.5rem;overflow-x:auto;padding-bottom:.7rem;scrollbar-width:none;margin-bottom:.5rem" id="filterRow"></div>
     <div class="rest-grid" id="restGrid"></div>
+  </div>
+
+  <!-- REVIEWS -->
+  <div class="sec" style="padding-top:0">
+    <div class="sec-head"><div class="sec-title">⭐ What customers say</div></div>
+    <div class="reviews-grid" id="reviewsGrid"></div>
   </div>
 </div>
 
-<!-- MENU PAGE -->
+<!-- ═══ MENU PAGE ═══ -->
 <div class="menu-pg" id="menuPg">
+  <button class="back-btn" onclick="goHome()">← Back to Home</button>
   <div class="rest-banner">
     <div class="rest-banner-inner">
       <div class="rb-img" id="rbImg"></div>
@@ -410,11 +559,69 @@ input,button,select{font-family:inherit;}
         <div id="rbCuisine" style="color:var(--mt);font-size:.86rem;margin-bottom:.3rem"></div>
         <div class="rb-badges" id="rbBadges"></div>
       </div>
+      <button class="rb-fav-btn" id="rbFavBtn" onclick="toggleRestFav()">❤️ Save</button>
     </div>
   </div>
+  <div class="menu-filter-bar" id="menuFilterBar"></div>
   <div class="menu-wrap">
     <div class="menu-nav" id="menuNav"></div>
     <div id="menuContent"></div>
+  </div>
+</div>
+
+<!-- ═══ WISHLIST PAGE ═══ -->
+<div class="page" id="wishlistPg">
+  <div class="sec">
+    <button class="back-btn" style="padding-left:0" onclick="showPage('home')">← Back</button>
+    <div class="sec-head"><div class="sec-title">❤️ Your Favourites</div></div>
+    <div id="wishlistContent"></div>
+  </div>
+</div>
+
+<!-- ═══ ORDERS PAGE ═══ -->
+<div class="page" id="ordersPg">
+  <div class="sec">
+    <button class="back-btn" style="padding-left:0" onclick="showPage('home')">← Back</button>
+    <div class="sec-head"><div class="sec-title">📦 Your Orders</div></div>
+    <div id="ordersContent"></div>
+  </div>
+</div>
+
+<!-- ═══ PROFILE PAGE ═══ -->
+<div class="page" id="profilePg">
+  <div class="sec">
+    <button class="back-btn" style="padding-left:0" onclick="showPage('home')">← Back</button>
+    <div class="profile-wrap" style="padding:0">
+      <div class="tomato-pro-banner" onclick="toast('👑 Tomato Pro coming soon!')">
+        <div class="tpb-icon">👑</div>
+        <div><div class="tpb-title">Upgrade to Tomato Pro</div><div class="tpb-sub">Free delivery + exclusive deals</div></div>
+        <button class="tpb-btn">Get Pro</button>
+      </div>
+      <div class="profile-header">
+        <div class="ph-avatar" id="phAvatar">P</div>
+        <div><div class="ph-name" id="phName">Pari Garg</div><div class="ph-email" id="phEmail">pgarg9556@gmail.com</div></div>
+        <button class="ph-edit" onclick="editProfile()">✏️ Edit</button>
+      </div>
+      <div class="profile-section">
+        <div class="ps-title">Account</div>
+        <div class="ps-item" onclick="showPage('orders')"><div class="ps-icon">📦</div><div class="ps-label">My Orders</div><div class="ps-value" id="psOrderCount">0 orders</div><div class="ps-arrow">›</div></div>
+        <div class="ps-item" onclick="showPage('wishlist')"><div class="ps-icon">❤️</div><div class="ps-label">Favourites</div><div class="ps-value" id="psWishCount">0 saved</div><div class="ps-arrow">›</div></div>
+        <div class="ps-item" onclick="toast('📍 Addresses: Raj Nagar, KIET Campus')"><div class="ps-icon">📍</div><div class="ps-label">Saved Addresses</div><div class="ps-value">2 addresses</div><div class="ps-arrow">›</div></div>
+        <div class="ps-item" onclick="toast('💳 Payments: UPI, Cards saved')"><div class="ps-icon">💳</div><div class="ps-label">Payment Methods</div><div class="ps-value">3 saved</div><div class="ps-arrow">›</div></div>
+      </div>
+      <div class="profile-section">
+        <div class="ps-title">Offers & Rewards</div>
+        <div class="ps-item" onclick="toast('🎁 You have 2 coupons: TOMATO50, FIRST100')"><div class="ps-icon">🎟️</div><div class="ps-label">My Coupons</div><div class="ps-value" style="color:var(--red);font-weight:700">2 active</div><div class="ps-arrow">›</div></div>
+        <div class="ps-item" onclick="toast('⭐ 340 Tomato Points = ₹34 off!')"><div class="ps-icon">⭐</div><div class="ps-label">Tomato Points</div><div class="ps-value" style="color:var(--go);font-weight:700">340 pts</div><div class="ps-arrow">›</div></div>
+        <div class="ps-item" onclick="toast('👥 Share referral code: PARI200 — Get ₹200!')"><div class="ps-icon">🔗</div><div class="ps-label">Refer & Earn</div><div class="ps-value">Code: PARI200</div><div class="ps-arrow">›</div></div>
+      </div>
+      <div class="profile-section">
+        <div class="ps-title">More</div>
+        <div class="ps-item" onclick="toast('⚙️ Settings coming soon!')"><div class="ps-icon">⚙️</div><div class="ps-label">Settings</div><div class="ps-arrow">›</div></div>
+        <div class="ps-item" onclick="toast('💬 Support chat opening...')"><div class="ps-icon">💬</div><div class="ps-label">Help & Support</div><div class="ps-arrow">›</div></div>
+        <div class="ps-item" onclick="toast('👋 Logged out!')"><div class="ps-icon">🚪</div><div class="ps-label" style="color:#dc2626">Logout</div><div class="ps-arrow">›</div></div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -422,54 +629,110 @@ input,button,select{font-family:inherit;}
 <footer class="footer" id="footer">
   <div class="footer-inner">
     <div class="footer-grid">
-      <div><div class="f-logo">tom<span>ato</span></div><div class="f-desc">Ghaziabad's fastest food delivery. Fresh, hot, and always on time.</div></div>
-      <div class="f-col"><h4>Company</h4><a>About</a><a>Careers</a><a>Blog</a></div>
-      <div class="f-col"><h4>Offers</h4><a>Tomato Pro</a><a>Gift Cards</a><a>Refer & Earn</a></div>
-      <div class="f-col"><h4>Help</h4><a>FAQ</a><a>Support</a><a>Track Order</a></div>
+      <div>
+        <div class="f-logo">tom<span>ato</span></div>
+        <div class="f-desc">Ghaziabad's fastest food delivery. Fresh, hot, and always on time.</div>
+        <div class="app-badges">
+          <div class="app-badge" onclick="toast('📱 App Store coming soon!')">🍎 App Store</div>
+          <div class="app-badge" onclick="toast('🤖 Play Store coming soon!')">▶ Play Store</div>
+        </div>
+      </div>
+      <div class="f-col"><h4>Company</h4><a onclick="toast('About Tomato')">About</a><a onclick="toast('Careers page!')">Careers</a><a onclick="toast('Tomato Blog')">Blog</a></div>
+      <div class="f-col"><h4>Offers</h4><a onclick="toast('Tomato Pro: ₹149/month')">Tomato Pro</a><a onclick="toast('Gift Cards coming!')">Gift Cards</a><a onclick="toast('Refer & Earn ₹200')">Refer & Earn</a></div>
+      <div class="f-col"><h4>Help</h4><a onclick="toast('FAQ page')">FAQ</a><a onclick="toast('Support chat')">Support</a><a onclick="showPage('orders')">Track Order</a></div>
     </div>
-    <div class="footer-bottom"><span>© 2025 Tomato</span><span>Privacy · Terms</span></div>
+    <div class="footer-bottom"><span>© 2025 Tomato · Made with ❤️ in Ghaziabad</span><span>Privacy · Terms · Sitemap</span></div>
   </div>
 </footer>
 
+<!-- BOTTOM NAV -->
+<div class="bottom-nav">
+  <div class="bn-inner">
+    <button class="bn-item on" id="bn-home" onclick="showPage('home');setActiveNav('home')"><div class="bn-icon">🏠</div>Home</button>
+    <button class="bn-item" id="bn-orders" onclick="showPage('orders');setActiveNav('orders')"><div class="bn-icon">📦</div>Orders</button>
+    <button class="bn-item" id="bn-wishlist" onclick="showPage('wishlist');setActiveNav('wishlist')" style="position:relative"><div class="bn-icon">❤️</div>Saved<span class="bn-badge" id="bnWishBadge" style="display:none">0</span></button>
+    <button class="bn-item" id="bn-profile" onclick="showPage('profile');setActiveNav('profile')"><div class="bn-icon">👤</div>Profile</button>
+  </div>
+</div>
+
 <script>
-// ══ DATA ══════════════════════════════════════════════════
+// ═══ DATA ═══════════════════════════════════════════════════
 const categories=[{e:'🍕',n:'Pizza'},{e:'🍔',n:'Burgers'},{e:'🍱',n:'Biryani'},{e:'🥡',n:'Chinese'},{e:'🥗',n:'Healthy'},{e:'🍰',n:'Desserts'},{e:'🐔',n:'Chicken'},{e:'🌯',n:'Wraps'},{e:'🥞',n:'Breakfast'},{e:'☕',n:'Cafe'},{e:'🍜',n:'Noodles'},{e:'🍦',n:'Ice Cream'}];
-const tickerItems=['🔥 50% OFF on your first order','🆓 Free delivery above ₹299','⚡ Delivery in 20 mins','🎁 Use code TOMATO50','🌟 500+ restaurants near you','🛵 Real-time order tracking'];
+const tickerItems=['🔥 50% OFF on your first order · Use code TOMATO50','🆓 Free delivery above ₹299','⚡ Delivery in 20 mins','🎁 New: Refer a friend & earn ₹200','🌟 500+ restaurants near you','🛵 Real-time GPS order tracking','👑 Try Tomato Pro — ₹149/month'];
+const filters=['All','Veg Only','Under ₹150','Rating 4.5+','Fast Delivery','Offers'];
+
 const restaurants=[
-  {id:1,name:'Spice Garden',cuisine:'North Indian · Mughlai',rating:4.5,time:'25–35',price:300,emoji:'🍛',disc:'50% OFF',
+  {id:1,name:'Spice Garden',cuisine:'North Indian · Mughlai',rating:4.5,time:'25–35',price:300,emoji:'🍛',disc:'50% OFF',tags:['North Indian','Biryani'],veg:false,
    menu:{'Best Sellers':[{id:101,n:'Chicken Biryani',d:'Aromatic basmati with tender chicken & whole spices',p:349,e:'🍱',veg:false,best:true},{id:102,n:'Butter Chicken',d:'Creamy tomato curry with chicken tikka',p:299,e:'🍗',veg:false,best:true},{id:103,n:'Dal Makhani',d:'Slow-cooked black lentils, buttery & rich',p:199,e:'🍲',veg:true}],'Starters':[{id:104,n:'Seekh Kebab',d:'Minced meat kebabs grilled on skewer, 4 pcs',p:249,e:'🍢',veg:false},{id:105,n:'Paneer Tikka',d:'Marinated paneer cubes in tandoor',p:229,e:'🧀',veg:true,best:true},{id:106,n:'Veg Samosa',d:'Crispy fried pastry filled with spiced potatoes',p:79,e:'🥟',veg:true}],'Breads':[{id:107,n:'Garlic Naan',d:'Tandoor bread with garlic butter',p:49,e:'🫓',veg:true},{id:108,n:'Laccha Paratha',d:'Flaky layered whole wheat bread',p:39,e:'🫓',veg:true}],'Desserts':[{id:109,n:'Gulab Jamun',d:'Soft milk dumplings in rose syrup, 4 pcs',p:89,e:'🟤',veg:true},{id:110,n:'Phirni',d:'Creamy rice pudding with cardamom',p:99,e:'🍮',veg:true}]}},
-  {id:2,name:"Pizza Planet",cuisine:'Pizza · Italian · Pasta',rating:4.3,time:'20–30',price:250,emoji:'🍕',disc:'₹125 OFF',
+  {id:2,name:"Pizza Planet",cuisine:'Pizza · Italian · Pasta',rating:4.3,time:'20–30',price:250,emoji:'🍕',disc:'₹125 OFF',tags:['Pizza','Italian'],veg:false,
    menu:{'Pizzas':[{id:201,n:'Margherita',d:'Classic tomato sauce, mozzarella, fresh basil',p:199,e:'🍕',veg:true,best:true},{id:202,n:'Chicken Pepperoni',d:'Loaded pepperoni, mozzarella, tomato sauce',p:349,e:'🍕',veg:false,best:true},{id:203,n:'Veggie Supreme',d:'Bell peppers, mushrooms, olives, onions, corn',p:279,e:'🍕',veg:true},{id:204,n:'BBQ Chicken',d:'Smoky BBQ, grilled chicken, red onions, cheddar',p:379,e:'🍕',veg:false}],'Sides':[{id:205,n:'Garlic Breadsticks (6pc)',d:'Buttery garlic bread with marinara dip',p:129,e:'🥖',veg:true},{id:206,n:'Buffalo Wings (6pc)',d:'Crispy wings in spicy buffalo sauce',p:199,e:'🍗',veg:false,best:true}],'Pasta':[{id:207,n:'Arrabiata Penne',d:'Penne in spicy tomato herb sauce',p:179,e:'🍝',veg:true},{id:208,n:'Chicken Alfredo',d:'Creamy white sauce pasta with grilled chicken',p:229,e:'🍝',veg:false}],'Drinks':[{id:209,n:'Pepsi (500ml)',d:'Ice cold Pepsi',p:59,e:'🥤',veg:true},{id:210,n:'Fresh Lime Soda',d:'Sweet or salted, refreshing',p:69,e:'🍋',veg:true}]}},
-  {id:3,name:'Burger Hub',cuisine:'Burgers · Shakes · Fries',rating:4.6,time:'15–25',price:200,emoji:'🍔',disc:'Buy 1 Get 1',
+  {id:3,name:'Burger Hub',cuisine:'Burgers · Shakes · Fries',rating:4.6,time:'15–25',price:200,emoji:'🍔',disc:'Buy 1 Get 1',tags:['Burgers','Fast Food'],veg:false,
    menu:{'Signature Burgers':[{id:301,n:'Classic Smash Burger',d:'Double smashed beef patty, pickles, special sauce',p:249,e:'🍔',veg:false,best:true},{id:302,n:'Crispy Chicken Burger',d:'Crispy fried chicken, coleslaw, sriracha mayo',p:229,e:'🍔',veg:false,best:true},{id:303,n:'Veggie Delight',d:'Spiced bean patty, lettuce, chipotle sauce',p:199,e:'🍔',veg:true},{id:304,n:'Double Cheese',d:'Double patty, double cheese, caramelized onions',p:299,e:'🍔',veg:false}],'Fries & Sides':[{id:305,n:'Loaded Cheese Fries',d:'Crispy fries, melted cheddar, jalapeños',p:149,e:'🍟',veg:true,best:true},{id:306,n:'Onion Rings (8pc)',d:'Golden crispy rings with ranch dip',p:119,e:'🧅',veg:true}],'Shakes':[{id:307,n:'Oreo Milkshake',d:'Thick shake blended with Oreo cookies',p:159,e:'🥛',veg:true,best:true},{id:308,n:'Mango Shake',d:'Fresh mango thick shake',p:139,e:'🥭',veg:true}]}},
-  {id:4,name:'Dragon Palace',cuisine:'Chinese · Thai · Asian',rating:4.2,time:'30–40',price:350,emoji:'🥡',disc:'Free delivery',
+  {id:4,name:'Dragon Palace',cuisine:'Chinese · Thai · Asian',rating:4.2,time:'30–40',price:350,emoji:'🥡',disc:'Free delivery',tags:['Chinese','Asian'],veg:false,
    menu:{'Starters':[{id:401,n:'Crispy Spring Rolls (6pc)',d:'Golden fried rolls with cabbage & noodles',p:149,e:'🌯',veg:true,best:true},{id:402,n:'Chicken Manchurian',d:'Crispy chicken in tangy Manchurian sauce',p:229,e:'🍗',veg:false,best:true},{id:403,n:'Honey Chilli Potato',d:'Crispy potatoes in sweet-spicy honey chilli',p:179,e:'🥔',veg:true}],'Main Course':[{id:404,n:'Veg Hakka Noodles',d:'Wok-tossed noodles with fresh vegetables',p:199,e:'🍜',veg:true},{id:405,n:'Chicken Fried Rice',d:'Stir-fried rice with chicken & egg',p:219,e:'🍚',veg:false,best:true},{id:406,n:'Kung Pao Chicken',d:'Tender chicken, peanuts, chillies in tangy sauce',p:279,e:'🍛',veg:false}],'Soups':[{id:407,n:'Hot & Sour Soup',d:'Classic tangy spicy soup with tofu',p:129,e:'🍲',veg:true},{id:408,n:'Sweet Corn Chicken',d:'Creamy corn soup, shredded chicken, egg drops',p:139,e:'🌽',veg:false}]}},
-  {id:5,name:'Sweet Bites',cuisine:'Desserts · Cakes · Coffee',rating:4.7,time:'20–30',price:150,emoji:'🍰',disc:'Free dessert',
+  {id:5,name:'Sweet Bites',cuisine:'Desserts · Cakes · Coffee',rating:4.7,time:'20–30',price:150,emoji:'🍰',disc:'Free dessert',tags:['Desserts','Cafe'],veg:true,
    menu:{'Cakes':[{id:501,n:'Chocolate Truffle Cake',d:'Rich dark chocolate ganache cake, 500g',p:249,e:'🎂',veg:true,best:true},{id:502,n:'Red Velvet Cake',d:'Moist red velvet, cream cheese frosting, 500g',p:279,e:'🍰',veg:true,best:true},{id:503,n:'Bento Cake',d:'Personal-size customizable cake',p:199,e:'🧁',veg:true}],'Pastries':[{id:504,n:'Butter Croissant',d:'Flaky French pastry, freshly baked',p:89,e:'🥐',veg:true},{id:505,n:'Choco Chip Cookies (4pc)',d:'Warm gooey cookies loaded with choco chips',p:99,e:'🍪',veg:true,best:true}],'Beverages':[{id:506,n:'Café Latte',d:'Espresso with steamed milk, latte art',p:129,e:'☕',veg:true},{id:507,n:'Hot Chocolate',d:'Rich Belgian hot chocolate, whipped cream',p:149,e:'🍫',veg:true,best:true},{id:508,n:'Iced Matcha Latte',d:'Premium matcha with oat milk over ice',p:169,e:'🍵',veg:true}]}},
-  {id:6,name:'Wrap & Roll',cuisine:'Rolls · Sandwiches · Wraps',rating:4.4,time:'15–20',price:180,emoji:'🌯',disc:'20% OFF',
+  {id:6,name:'Wrap & Roll',cuisine:'Rolls · Sandwiches · Wraps',rating:4.4,time:'15–20',price:180,emoji:'🌯',disc:'20% OFF',tags:['Wraps','Sandwiches'],veg:false,
    menu:{'Rolls':[{id:601,n:'Paneer Tikka Roll',d:'Paratha stuffed with spiced paneer tikka',p:149,e:'🌯',veg:true,best:true},{id:602,n:'Chicken Kathi Roll',d:'Egg-layered paratha with spicy chicken',p:169,e:'🌯',veg:false,best:true},{id:603,n:'Egg Roll',d:'Paratha with scrambled egg & green chutney',p:99,e:'🥚',veg:false}],'Sandwiches':[{id:604,n:'Club Sandwich',d:'Triple-decker chicken, egg, cheese, lettuce',p:189,e:'🥪',veg:false,best:true},{id:605,n:'Veg Cheese Grilled',d:'Grilled sandwich, veggies, processed cheese',p:129,e:'🥪',veg:true}],'Combos':[{id:606,n:'Roll + Fries + Drink',d:'Any roll + fries + 300ml cold drink',p:249,e:'🍱',veg:false,best:true}]}},
 ];
 
-// ══ STATE ═════════════════════════════════════════════════
-let cart={}, curRest=null, promoOn=false, selAddr=0, selPay=0, chkStep=1, rzpTab='upi';
+const trendingDishes=[
+  {e:'🍱',n:'Chicken Biryani',r:'Spice Garden',p:349},
+  {e:'🍕',n:'Margherita Pizza',r:'Pizza Planet',p:199},
+  {e:'🍔',n:'Smash Burger',r:'Burger Hub',p:249},
+  {e:'🍗',n:'Butter Chicken',r:'Spice Garden',p:299},
+  {e:'🎂',n:'Chocolate Cake',r:'Sweet Bites',p:249},
+  {e:'🍜',n:'Veg Noodles',r:'Dragon Palace',p:199},
+  {e:'🌯',n:'Paneer Roll',r:'Wrap & Roll',p:149},
+  {e:'☕',n:'Café Latte',r:'Sweet Bites',p:129},
+];
 
-// ══ INIT ══════════════════════════════════════════════════
+const sampleReviews=[
+  {name:'Rahul S.',avatar:'#e8320a',rest:'Spice Garden',stars:5,text:'Best biryani in Ghaziabad! Delivered hot in 25 min. Will order again for sure 🔥'},
+  {name:'Priya M.',avatar:'#8b5cf6',rest:'Pizza Planet',stars:5,text:'Loved the Margherita! Crispy crust, perfect cheese. Great value for money!'},
+  {name:'Amit K.',avatar:'#16a34a',rest:'Burger Hub',stars:4,text:'Smash burger was delicious. Fries were crispy. Delivery was super fast!'},
+  {name:'Sneha R.',avatar:'#2563eb',rest:'Sweet Bites',stars:5,text:'The chocolate truffle cake was HEAVEN! Perfect for gifting. 10/10 recommend.'},
+  {name:'Vikram T.',avatar:'#d97706',rest:'Dragon Palace',stars:4,text:'Spring rolls and fried rice were amazing. Manchurian was a bit spicy but tasty!'},
+  {name:'Ananya B.',avatar:'#ec4899',rest:'Wrap & Roll',stars:5,text:'Quickest delivery ever! Paneer roll was fresh and filling. Love this app!'},
+];
+
+// ═══ STATE ══════════════════════════════════════════════════
+let cart={}, curRest=null, promoOn=false, selAddr=0, selPay=0, chkStep=1, rzpTab='upi';
+let wishlist=new Set(), orderHistory=[], curFilter='All', favItems=new Set();
+let profileData={name:'Pari Garg',email:'pgarg9556@gmail.com'};
+
+// ═══ INIT ════════════════════════════════════════════════════
 function init(){
-  // ticker
-  const t=tickerItems.concat(tickerItems);
-  document.getElementById('ticker').innerHTML=t.map(i=>`<div class="ticker-item">⚡ ${i}</div>`).join('');
-  // categories
-  document.getElementById('catRow').innerHTML=categories.map((c,i)=>`<div class="cat-pill" onclick="filterCat('${c.n}',this)"><span>${c.e}</span>${c.n}</div>`).join('');
+  document.getElementById('ticker').innerHTML=[...tickerItems,...tickerItems].map(i=>`<div class="ticker-item">⚡ ${i}</div>`).join('');
+  document.getElementById('catRow').innerHTML=categories.map(c=>`<div class="cat-pill" onclick="filterCat('${c.n}',this)"><span>${c.e}</span>${c.n}</div>`).join('');
+  document.getElementById('filterRow').innerHTML=filters.map((f,i)=>`<div class="cat-pill${i===0?' on':''}" style="font-size:.76rem;padding:.38rem .85rem" onclick="applyFilter('${f}',this)">${f}</div>`).join('');
+  document.getElementById('trendRow').innerHTML=trendingDishes.map((d,i)=>`
+    <div class="dish-card" onclick="openRestByName('${d.r}')">
+      <div class="dc-img">${d.e}</div>
+      <div class="dc-body"><div class="dc-name">${d.n}</div><div class="dc-rest">${d.r}</div><div class="dc-price">₹${d.p}</div></div>
+    </div>`).join('');
+  document.getElementById('reviewsGrid').innerHTML=sampleReviews.map(r=>`
+    <div class="review-card">
+      <div class="rv-top">
+        <div class="rv-avatar" style="background:${r.avatar}">${r.name[0]}</div>
+        <div><div class="rv-name">${r.name}</div><div class="rv-rest">Ordered from ${r.rest}</div></div>
+        <div class="rv-stars" style="margin-left:auto">${'★'.repeat(r.stars)}${'☆'.repeat(5-r.stars)}</div>
+      </div>
+      <div class="rv-text">${r.text}</div>
+    </div>`).join('');
   renderRests(restaurants);
+  updateProfileUI();
 }
 
 function renderRests(list){
   const g=document.getElementById('restGrid');
-  g.innerHTML=list.length?list.map(r=>`
+  if(!list.length){g.innerHTML='<p style="color:var(--mt);padding:2rem;grid-column:1/-1">No restaurants found.</p>';return;}
+  g.innerHTML=list.map(r=>`
     <div class="rest-card" onclick="openRest(${r.id})">
       <div class="rc-img">${r.emoji}
         ${r.disc?`<span class="rc-disc">${r.disc}</span>`:''}
-        ${r.veg?'<span class="rc-promo">Pure Veg</span>':''}
+        ${r.veg?'<span class="rc-promo">Pure Veg ✓</span>':''}
+        <button class="rc-fav${wishlist.has(r.id)?' loved':''}" onclick="event.stopPropagation();toggleWishlist(${r.id})" title="Save restaurant">${wishlist.has(r.id)?'❤️':'🤍'}</button>
       </div>
       <div class="rc-body">
         <div class="rc-name">${r.name}</div>
@@ -478,28 +741,160 @@ function renderRests(list){
           <span>· ${r.time} min</span>
           <span>· ₹${r.price} for two</span>
         </div>
-        <div style="font-size:.72rem;color:var(--mt);margin-top:.2rem">${r.cuisine}</div>
+        <div style="font-size:.72rem;color:var(--mt);margin:.2rem 0">${r.cuisine}</div>
+        <div class="rc-tags">${r.tags.map(t=>`<span class="rc-tag">${t}</span>`).join('')}</div>
       </div>
-    </div>`).join(''):'<p style="color:var(--mt);padding:2rem">No restaurants found.</p>';
+    </div>`).join('');
 }
 
-function filterRests(){
-  const q=document.getElementById('nsearch').value.toLowerCase();
-  document.getElementById('restHd').textContent=q?`Results for "${q}"`:'Top Restaurants';
-  renderRests(q?restaurants.filter(r=>r.name.toLowerCase().includes(q)||r.cuisine.toLowerCase().includes(q)):restaurants);
+// ═══ FILTER & SEARCH ════════════════════════════════════════
+function applyFilter(f,el){
+  curFilter=f;
+  document.querySelectorAll('#filterRow .cat-pill').forEach(p=>p.classList.remove('on'));
+  el.classList.add('on');
+  let list=restaurants;
+  if(f==='Veg Only') list=restaurants.filter(r=>r.veg);
+  else if(f==='Under ₹150') list=restaurants.filter(r=>r.price<=150);
+  else if(f==='Rating 4.5+') list=restaurants.filter(r=>r.rating>=4.5);
+  else if(f==='Fast Delivery') list=restaurants.filter(r=>parseInt(r.time)<=20);
+  else if(f==='Offers') list=restaurants.filter(r=>r.disc);
+  document.getElementById('restHd').textContent=f==='All'?'Top Restaurants':`${f} Restaurants`;
+  renderRests(list);
 }
 
 function filterCat(name,el){
   document.querySelectorAll('.cat-pill').forEach(p=>p.classList.remove('on'));
   el.classList.add('on');
   document.getElementById('restHd').textContent=name+' Restaurants';
-  renderRests(restaurants.filter(r=>r.cuisine.toLowerCase().includes(name.toLowerCase())||restaurants));
+  renderRests(restaurants.filter(r=>r.tags.some(t=>t.toLowerCase().includes(name.toLowerCase()))||r.cuisine.toLowerCase().includes(name.toLowerCase())));
 }
 
-// ══ RESTAURANT & MENU ═════════════════════════════════════
+function handleSearch(){
+  const q=document.getElementById('nsearch').value.trim().toLowerCase();
+  const drop=document.getElementById('searchDrop');
+  if(!q){drop.innerHTML='';drop.classList.remove('on');return;}
+  const restMatches=restaurants.filter(r=>r.name.toLowerCase().includes(q)||r.cuisine.toLowerCase().includes(q)).slice(0,3);
+  const dishMatches=[];
+  restaurants.forEach(r=>{Object.values(r.menu).forEach(items=>{items.forEach(i=>{if(i.n.toLowerCase().includes(q))dishMatches.push({...i,rest:r.name,rid:r.id});});});});
+  const allDish=dishMatches.slice(0,3);
+  if(!restMatches.length&&!allDish.length){drop.innerHTML=`<div class="sr-empty">No results for "${q}"</div>`;drop.classList.add('on');return;}
+  drop.innerHTML=[
+    ...restMatches.map(r=>`<div class="sr-item" onmousedown="openRest(${r.id})"><div class="sr-icon">${r.emoji}</div><div><div class="sr-name">${r.name}</div><div class="sr-sub">${r.cuisine}</div></div></div>`),
+    ...allDish.map(d=>`<div class="sr-item" onmousedown="openRest(${d.rid})"><div class="sr-icon" style="font-size:1.3rem">${d.e}</div><div><div class="sr-name">${d.n}</div><div class="sr-sub">from ${d.rest} · ₹${d.p}</div></div></div>`),
+  ].join('');
+  drop.classList.add('on');
+}
+
+function showSearchDrop(){if(document.getElementById('nsearch').value)document.getElementById('searchDrop').classList.add('on');}
+function hideSearchDropDelay(){setTimeout(()=>document.getElementById('searchDrop').classList.remove('on'),200);}
+function heroSearchFn(){const q=document.getElementById('heroSearch').value.trim();if(!q)return;document.getElementById('nsearch').value=q;handleSearch();document.getElementById('restHd').textContent=`Results for "${q}"`;renderRests(restaurants.filter(r=>r.name.toLowerCase().includes(q.toLowerCase())||r.cuisine.toLowerCase().includes(q.toLowerCase())));}
+
+// ═══ PAGES ══════════════════════════════════════════════════
+function showPage(p){
+  ['home','wishlist','orders','profile'].forEach(pg=>{
+    document.getElementById(pg+'Pg')?.classList.remove('on');
+  });
+  document.getElementById('menuPg').classList.remove('on');
+  document.getElementById('footer').style.display='block';
+  if(p==='home'){document.getElementById('homePg').classList.add('on');}
+  else if(p==='wishlist'){document.getElementById('wishlistPg').classList.add('on');renderWishlist();}
+  else if(p==='orders'){document.getElementById('ordersPg').classList.add('on');renderOrders();}
+  else if(p==='profile'){document.getElementById('profilePg').classList.add('on');updateProfileUI();}
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function setActiveNav(pg){
+  document.querySelectorAll('.bn-item').forEach(b=>b.classList.remove('on'));
+  document.getElementById('bn-'+pg)?.classList.add('on');
+}
+
+// ═══ WISHLIST ════════════════════════════════════════════════
+function toggleWishlist(id){
+  if(wishlist.has(id)){wishlist.delete(id);toast('💔 Removed from favourites');}
+  else{wishlist.add(id);toast('❤️ Added to favourites!');}
+  updateWishlistUI();
+  renderRests(restaurants);
+}
+
+function toggleRestFav(){
+  if(!curRest)return;
+  const btn=document.getElementById('rbFavBtn');
+  if(wishlist.has(curRest.id)){wishlist.delete(curRest.id);btn.textContent='🤍 Save';btn.classList.remove('loved');toast('💔 Removed from favourites');}
+  else{wishlist.add(curRest.id);btn.innerHTML='❤️ Saved';btn.classList.add('loved');toast('❤️ Saved to favourites!');}
+  updateWishlistUI();
+}
+
+function updateWishlistUI(){
+  const c=wishlist.size;
+  document.getElementById('wbCount').textContent=c;
+  document.getElementById('wbCount').style.display=c?'flex':'none';
+  document.getElementById('bnWishBadge').textContent=c;
+  document.getElementById('bnWishBadge').style.display=c?'flex':'none';
+  document.getElementById('psWishCount').textContent=c+' saved';
+}
+
+function renderWishlist(){
+  const content=document.getElementById('wishlistContent');
+  if(!wishlist.size){
+    content.innerHTML=`<div class="wl-empty"><div class="wl-empty-ic">🤍</div><div style="font-weight:800;font-size:1.1rem;margin-bottom:.4rem">No favourites yet</div><div style="color:var(--mt);font-size:.9rem">Tap ❤️ on any restaurant to save it here</div><button onclick="showPage('home')" style="margin-top:1.2rem;padding:.6rem 1.5rem;background:var(--red);color:#fff;border:none;border-radius:10px;font-weight:700;cursor:pointer;font-family:inherit">Browse Restaurants</button></div>`;
+    return;
+  }
+  const saved=restaurants.filter(r=>wishlist.has(r.id));
+  content.innerHTML=`<div class="wishlist-grid">${saved.map(r=>`
+    <div class="rest-card" onclick="openRest(${r.id})">
+      <div class="rc-img">${r.emoji}
+        ${r.disc?`<span class="rc-disc">${r.disc}</span>`:''}
+        <button class="rc-fav loved" onclick="event.stopPropagation();toggleWishlist(${r.id})" title="Remove">❤️</button>
+      </div>
+      <div class="rc-body">
+        <div class="rc-name">${r.name}</div>
+        <div class="rc-meta"><span class="rc-rating">⭐ ${r.rating}</span><span>· ${r.time} min</span></div>
+      </div>
+    </div>`).join('')}</div>`;
+}
+
+// ═══ ORDERS ══════════════════════════════════════════════════
+function renderOrders(){
+  const c=document.getElementById('ordersContent');
+  if(!orderHistory.length){
+    c.innerHTML=`<div class="wl-empty"><div class="wl-empty-ic">📦</div><div style="font-weight:800;font-size:1.1rem;margin-bottom:.4rem">No orders yet</div><div style="color:var(--mt);font-size:.9rem">Your order history will appear here</div><button onclick="showPage('home')" style="margin-top:1.2rem;padding:.6rem 1.5rem;background:var(--red);color:#fff;border:none;border-radius:10px;font-weight:700;cursor:pointer;font-family:inherit">Order Now</button></div>`;
+    return;
+  }
+  c.innerHTML=`<div class="orders-list">${orderHistory.map((o,i)=>`
+    <div class="order-card">
+      <div class="oc-top">
+        <div class="oc-emoji">${o.emoji}</div>
+        <div><div class="oc-name">${o.restName}</div><div class="oc-date">${o.date}</div></div>
+        <span class="oc-status ocs-del">✓ Delivered</span>
+      </div>
+      <div class="oc-items">${o.items}</div>
+      <div class="oc-bottom">
+        <div class="oc-total">₹${o.total}</div>
+        <div style="display:flex;gap:.5rem">
+          <button class="oc-reorder" onclick="event.stopPropagation();openRest(${o.restId})">Reorder</button>
+          <button onclick="event.stopPropagation();openRateModal(${o.restId})" style="padding:.38rem .9rem;background:transparent;border:1.5px solid var(--br);border-radius:8px;font-size:.76rem;font-weight:700;cursor:pointer;font-family:inherit;transition:all .18s" onmouseover="this.style.borderColor='var(--go)';this.style.color='var(--go)'" onmouseout="this.style.borderColor='var(--br)';this.style.color='var(--tx)'">⭐ Rate</button>
+        </div>
+      </div>
+    </div>`).join('')}</div>`;
+}
+
+function updateProfileUI(){
+  document.getElementById('phName').textContent=profileData.name;
+  document.getElementById('phEmail').textContent=profileData.email;
+  document.getElementById('phAvatar').textContent=profileData.name[0].toUpperCase();
+  document.getElementById('psOrderCount').textContent=orderHistory.length+' orders';
+}
+
+function editProfile(){
+  const n=prompt('Enter your name:',profileData.name);
+  if(n&&n.trim()){profileData.name=n.trim();updateProfileUI();toast('✅ Profile updated!');}
+}
+
+// ═══ RESTAURANT & MENU ═══════════════════════════════════════
 function openRest(id){
   curRest=restaurants.find(r=>r.id===id);
   document.getElementById('homePg').classList.remove('on');
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
   document.getElementById('footer').style.display='none';
   document.getElementById('menuPg').classList.add('on');
   document.getElementById('rbImg').textContent=curRest.emoji;
@@ -509,16 +904,22 @@ function openRest(id){
     <div class="rb-badge">⭐ ${curRest.rating}</div>
     <div class="rb-badge">⏱ ${curRest.time} min</div>
     <div class="rb-badge">💰 ₹${curRest.price} for two</div>
-    ${curRest.disc?`<div class="rb-badge" style="color:var(--red)">🔥 ${curRest.disc}</div>`:''}`;
+    ${curRest.disc?`<div class="rb-badge" style="color:var(--red);border-color:rgba(232,50,10,.2)">🔥 ${curRest.disc}</div>`:''}`;
+  const favBtn=document.getElementById('rbFavBtn');
+  if(wishlist.has(curRest.id)){favBtn.innerHTML='❤️ Saved';favBtn.classList.add('loved');}
+  else{favBtn.innerHTML='🤍 Save';favBtn.classList.remove('loved');}
   const cats=Object.keys(curRest.menu);
+  document.getElementById('menuFilterBar').innerHTML=cats.map((c,i)=>`<div class="mf-pill${i===0?' on':''}" onclick="scrollSec('${c}',this)">${c}</div>`).join('');
   document.getElementById('menuNav').innerHTML=cats.map((c,i)=>`<div class="mn-item${i===0?' on':''}" onclick="scrollSec('${c}',this)">${c}</div>`).join('');
   document.getElementById('menuContent').innerHTML=cats.map(c=>`
-    <div class="menu-sec" id="sec_${c.replace(/\s+/g,'_')}">
-      <div class="ms-title">${c}</div>
+    <div class="menu-sec" id="sec_${c.replace(/\W/g,'_')}">
+      <div class="ms-title">${c} <span style="font-size:.72rem;color:var(--mt);font-weight:400">(${curRest.menu[c].length} items)</span></div>
       <div class="items-list">${curRest.menu[c].map(itemHTML).join('')}</div>
     </div>`).join('');
   window.scrollTo({top:0,behavior:'smooth'});
 }
+
+function openRestByName(name){const r=restaurants.find(x=>x.name===name);if(r)openRest(r.id);}
 
 function goHome(){
   document.getElementById('menuPg').classList.remove('on');
@@ -532,6 +933,7 @@ function itemHTML(item){
   const ctrl=inC
     ?`<div class="ir-qty"><button class="iq-btn" onclick="updQty(event,${item.id},-1)">−</button><span class="iq-n">${inC.qty}</span><button class="iq-btn" onclick="updQty(event,${item.id},1)">+</button></div>`
     :`<button class="ir-add" onclick="addItem(event,${item.id})">ADD</button>`;
+  const isFav=favItems.has(item.id);
   return `<div class="item-row">
     <div class="ir-info">
       <div class="ir-veg${item.veg?'':' nv'}"></div>
@@ -544,27 +946,36 @@ function itemHTML(item){
       <div class="ir-img">${item.e}</div>
       <div id="irctrl_${item.id}">${ctrl}</div>
     </div>
+    <button class="item-fav${isFav?' on':''}" onclick="toggleItemFav(event,${item.id})" title="Save item">${isFav?'❤️':'🤍'}</button>
   </div>`;
 }
 
-function scrollSec(cat,el){
-  document.querySelectorAll('.mn-item').forEach(x=>x.classList.remove('on'));
-  el.classList.add('on');
-  document.getElementById('sec_'+cat.replace(/\s+/g,'_'))?.scrollIntoView({behavior:'smooth',block:'start'});
+function toggleItemFav(e,id){
+  e.stopPropagation();
+  const btn=e.currentTarget;
+  if(favItems.has(id)){favItems.delete(id);btn.textContent='🤍';btn.classList.remove('on');toast('💔 Removed from saved items');}
+  else{favItems.add(id);btn.textContent='❤️';btn.classList.add('on');toast('❤️ Item saved!');}
 }
 
-// ══ CART ══════════════════════════════════════════════════
+function scrollSec(cat,el){
+  document.querySelectorAll('.mn-item,.mf-pill').forEach(x=>x.classList.remove('on'));
+  document.querySelectorAll('.mn-item,.mf-pill').forEach(x=>{if(x.textContent.trim()===cat)x.classList.add('on');});
+  el.classList.add('on');
+  document.getElementById('sec_'+cat.replace(/\W/g,'_'))?.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+// ═══ CART ════════════════════════════════════════════════════
 function addItem(e,id){
   e.stopPropagation();
   const item=findItem(id);if(!item)return;
   const cartRests=new Set(Object.values(cart).map(c=>c.rid));
   if(cartRests.size&&![...cartRests].includes(curRest.id)){
-    if(!confirm('Clear cart and add from this restaurant?'))return;
+    if(!confirm('Your cart has items from another restaurant. Clear cart and add from '+curRest.name+'?'))return;
     cart={};
   }
-  cart[id]={item,qty:1,rid:curRest.id};
+  cart[id]={item,qty:1,rid:curRest.id,restName:curRest.name,restEmoji:curRest.emoji};
   refreshCtrl(id);updateCartUI();
-  toast('✅ '+item.n+' added');
+  toast('✅ '+item.n+' added to cart');
 }
 
 function updQty(e,id,d){
@@ -605,16 +1016,16 @@ function updateCartUI(){
   document.getElementById('ftotal').textContent='₹'+t.total;
   document.getElementById('fcart').classList.toggle('on',cnt>0);
   const rids=new Set(items.map(c=>c.rid));
-  if(rids.size){const r=restaurants.find(x=>x.id===[...rids][0]);document.getElementById('cpRname').textContent=r?.name||'';}
+  if(rids.size){const r=restaurants.find(x=>x.id===[...rids][0]);document.getElementById('cpRname').textContent=(r?.name||'')+' · '+cnt+' item'+(cnt>1?'s':'');}
   const body=document.getElementById('cpBody'),foot=document.getElementById('cpFoot');
   if(!items.length){
-    body.innerHTML=`<div class="cp-empty"><div class="cp-empty-ic">🛒</div><div style="font-weight:700;margin-bottom:.3rem">Cart is empty</div><div style="font-size:.8rem;color:var(--lt)">Add items to get started</div></div>`;
+    body.innerHTML=`<div class="cp-empty"><div class="cp-empty-ic">🛒</div><div style="font-weight:800;margin-bottom:.3rem;font-size:1rem">Cart is empty</div><div style="font-size:.82rem;color:var(--lt)">Add delicious items to get started!</div></div>`;
     foot.style.display='none';return;
   }
   body.innerHTML=items.map(c=>`
     <div class="cart-item">
       <div class="ci-img">${c.item.e}</div>
-      <div class="ci-info"><div class="ci-name">${c.item.n}</div><div class="ci-price">₹${c.item.p} × ${c.qty}</div></div>
+      <div class="ci-info"><div class="ci-name">${c.item.n}</div><div class="ci-price">₹${c.item.p} × ${c.qty} = ₹${c.item.p*c.qty}</div></div>
       <div class="ci-ctrl">
         <button class="cib" onclick="updQty(event,${c.item.id},-1)">−</button>
         <span class="cin">${c.qty}</span>
@@ -622,12 +1033,15 @@ function updateCartUI(){
       </div>
     </div>`).join('');
   foot.style.display='block';
+  const note=document.getElementById('cpNote');
+  if(t.sub>0&&t.sub<299){note.innerHTML=`🛵 Add ₹${299-t.sub} more for free delivery!`;note.style.display='flex';}
+  else{note.style.display='none';}
   document.getElementById('cartBill').innerHTML=`
-    <div class="cb-row"><span>Subtotal</span><span>₹${t.sub}</span></div>
-    ${t.disc?`<div class="cb-row" style="color:var(--gr)"><span>Promo (TOMATO50)</span><span>−₹${t.disc}</span></div>`:''}
-    <div class="cb-row"><span>Delivery</span><span>${t.del?'₹'+t.del:'🆓 FREE'}</span></div>
-    <div class="cb-row"><span>GST (5%)</span><span>₹${t.tax}</span></div>
-    <div class="cb-row total"><span>Total</span><span>₹${t.total}</span></div>`;
+    <div class="cb-row"><span>Subtotal (${cnt} items)</span><span>₹${t.sub}</span></div>
+    ${t.disc?`<div class="cb-row" style="color:var(--gr)"><span>🎉 Promo (TOMATO50)</span><span>−₹${t.disc}</span></div>`:''}
+    <div class="cb-row"><span>Delivery fee</span><span>${t.del?'₹'+t.del:'🆓 FREE'}</span></div>
+    <div class="cb-row"><span>GST & taxes (5%)</span><span>₹${t.tax}</span></div>
+    <div class="cb-row total"><span>Total amount</span><span>₹${t.total}</span></div>`;
 }
 
 function openCart(){document.getElementById('cOverlay').classList.add('on');document.getElementById('cPanel').classList.add('on');}
@@ -636,16 +1050,19 @@ function closeCart(){document.getElementById('cOverlay').classList.remove('on');
 function applyPromo(){
   const v=document.getElementById('promoIn').value.trim().toUpperCase();
   if(v==='TOMATO50'){promoOn=true;updateCartUI();toast('🎉 Promo applied! 10% off up to ₹100');}
-  else toast('❌ Invalid promo code');
+  else if(v==='FIRST100'){promoOn=true;updateCartUI();toast('🎉 FIRST100 applied! Extra ₹100 off');}
+  else toast('❌ Invalid promo code. Try TOMATO50');
   document.getElementById('promoIn').value='';
 }
 
-// ══ CHECKOUT ══════════════════════════════════════════════
+function applyPromoCode(code){toast(`🎉 Use code ${code} at checkout!`);}
+
+// ═══ CHECKOUT ════════════════════════════════════════════════
 function openCheckout(){closeCart();chkStep=1;document.getElementById('chkModal').classList.add('on');renderChk();}
 function closeCheckout(){document.getElementById('chkModal').classList.remove('on');}
 
 function renderChk(){
-  const titles={1:'Delivery Address',2:'Payment Method',3:'Order Tracking'};
+  const titles={1:'📍 Delivery Address',2:'💳 Payment Method',3:'🎉 Order Placed!'};
   document.getElementById('chkTitle').textContent=titles[chkStep];
   const body=document.getElementById('chkBody');
   if(chkStep===1)body.innerHTML=addrHTML();
@@ -657,10 +1074,11 @@ function addrHTML(){
   const t=getTotals();
   const addrs=[{icon:'🏠',label:'Home',addr:'A-24, Raj Nagar, Ghaziabad UP 201001'},{icon:'🏢',label:'Work',addr:'KIET Campus, Muradnagar, Ghaziabad UP 201206'},{icon:'🏫',label:'College',addr:'Near Raj Nagar Extension, GZB 201017'}];
   return`<div class="steps-bar"><div class="step-dot cur"></div><div class="step-dot"></div><div class="step-dot"></div></div>
-    <div class="addr-list">${addrs.map((a,i)=>`<div class="addr-card${selAddr===i?' sel':''}" onclick="selAddr=${i};renderChk()"><div class="ac-icon">${a.icon}</div><div class="ac-text"><div class="ac-label">${a.label}</div>${a.addr}</div></div>`).join('')}<div class="addr-card" onclick="toast('📍 Add new address')"><div class="ac-icon">➕</div><div class="ac-text"><div class="ac-label">Add new address</div>Enter a new delivery location</div></div></div>
-    <div class="os-box">${Object.values(cart).map(c=>`<div class="os-row"><span>${c.item.n} ×${c.qty}</span><span>₹${c.item.p*c.qty}</span></div>`).join('')}<div class="os-row total"><span>Total</span><span>₹${t.total}</span></div></div>
+    <div class="addr-list">${addrs.map((a,i)=>`<div class="addr-card${selAddr===i?' sel':''}" onclick="selAddr=${i};renderChk()"><div class="ac-icon">${a.icon}</div><div class="ac-text"><div class="ac-label">${a.label}</div>${a.addr}</div>${selAddr===i?'<span style="color:var(--gr);font-size:1.1rem">✓</span>':''}</div>`).join('')}
+    <div class="addr-card" onclick="toast('📍 Add new address feature coming soon!')"><div class="ac-icon">➕</div><div class="ac-text"><div class="ac-label">Add new address</div>Enter a new delivery location</div></div></div>
+    <div class="os-box">${Object.values(cart).map(c=>`<div class="os-row"><span>${c.item.e} ${c.item.n} ×${c.qty}</span><span>₹${c.item.p*c.qty}</span></div>`).join('')}<div class="os-row total"><span>Total payable</span><span style="color:var(--red)">₹${t.total}</span></div></div>
     <button class="pay-now-btn" onclick="chkStep=2;renderChk()">Continue to Payment →</button>
-    <button class="mback-btn" onclick="closeCheckout()">← Back to Cart</button>`;
+    <button class="mback-btn" onclick="closeCheckout();openCart()">← Back to Cart</button>`;
 }
 
 function payHTML(){
@@ -668,8 +1086,8 @@ function payHTML(){
   const methods=[{icon:'💳',n:'Credit / Debit Card',s:'Visa · Mastercard · RuPay'},{icon:'📱',n:'UPI',s:'GPay · PhonePe · Paytm · BHIM'},{icon:'🏦',n:'Net Banking',s:'50+ banks supported'},{icon:'💵',n:'Cash on Delivery',s:'Pay when order arrives'}];
   return`<div class="steps-bar"><div class="step-dot done"></div><div class="step-dot cur"></div><div class="step-dot"></div></div>
     <div class="pay-list">${methods.map((m,i)=>`<div class="pay-card${selPay===i?' sel':''}" onclick="selPay=${i};renderChk()"><div class="pc-icon">${m.icon}</div><div class="pc-info"><div class="pc-name">${m.n}</div><div class="pc-sub">${m.s}</div></div><div class="pc-radio"></div></div>`).join('')}</div>
-    <div class="os-box"><div class="os-row total"><span>Amount Payable</span><span style="color:var(--red)">₹${t.total}</span></div></div>
-    <button class="pay-now-btn" onclick="openRzp(${t.total})">🔒 Pay ₹${t.total} Securely →</button>
+    <div class="os-box"><div class="os-row total"><span>Amount Payable</span><span style="color:var(--red);font-size:1rem">₹${t.total}</span></div></div>
+    <button class="pay-now-btn" onclick="openRzp(${t.total})">🔒 Pay ₹${t.total} Securely</button>
     <button class="mback-btn" onclick="chkStep=1;renderChk()">← Change Address</button>`;
 }
 
@@ -677,15 +1095,21 @@ function trackHTML(){
   const oid='ORD'+Math.floor(1e5+Math.random()*9e5);
   const eta=new Date(Date.now()+28*6e4);
   const etaStr=eta.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});
-  const steps=[{icon:'✅',n:'Order Confirmed',t:'Just now',s:'done'},{icon:'👨‍🍳',n:'Preparing your order',t:'~12 mins',s:'cur'},{icon:'🛵',n:'Rider on the way',t:'~22 mins',s:'pend'},{icon:'🏠',n:'Delivered',t:'ETA '+etaStr,s:'pend'}];
+  const steps=[{icon:'✅',n:'Order Confirmed',t:'Just now',s:'done'},{icon:'👨‍🍳',n:'Preparing your food',t:'~10 mins',s:'cur'},{icon:'🛵',n:'Rider on the way',t:'~20 mins',s:'pend'},{icon:'🏠',n:'Delivered!',t:'ETA '+etaStr,s:'pend'}];
   setTimeout(()=>{const els=document.querySelectorAll('.ts');if(els[2]){els[1].classList.remove('cur');els[1].classList.add('done');els[2].classList.remove('pend');els[2].classList.add('cur');}},5000);
   return`<div class="steps-bar"><div class="step-dot done"></div><div class="step-dot done"></div><div class="step-dot done"></div></div>
-    <div style="text-align:center;padding:.5rem 0 1.5rem"><div style="font-size:3.5rem;margin-bottom:.5rem;animation:popIn .5s ease">🎉</div><div style="font-size:1.15rem;font-weight:800;margin-bottom:.3rem">Order Placed!</div><div style="font-size:.82rem;color:var(--mt)">Order ID: <strong>${oid}</strong></div><div style="margin-top:.7rem;display:inline-flex;align-items:center;gap:.4rem;background:#fff5f3;border:1px solid rgba(232,50,10,.2);padding:.42rem 1rem;border-radius:999px;font-size:.82rem;font-weight:700;color:var(--red)">⏱ Estimated by ${etaStr}</div></div>
+    <div style="text-align:center;padding:.5rem 0 1.5rem">
+      <div style="font-size:3.5rem;margin-bottom:.5rem;animation:popIn .5s ease">🎉</div>
+      <div style="font-size:1.2rem;font-weight:900;margin-bottom:.3rem">Order Placed!</div>
+      <div style="font-size:.82rem;color:var(--mt)">Order ID: <strong>${oid}</strong></div>
+      <div style="margin-top:.7rem;display:inline-flex;align-items:center;gap:.4rem;background:#fff5f3;border:1px solid rgba(232,50,10,.2);padding:.42rem 1rem;border-radius:999px;font-size:.82rem;font-weight:700;color:var(--red)">⏱ Estimated by ${etaStr}</div>
+    </div>
     <div class="track-steps">${steps.map((s,i)=>`<div class="ts ${s.s}">${i<steps.length-1?'<div class="ts-line"></div>':''}<div class="ts-icon">${s.icon}</div><div class="ts-info"><div class="ts-name">${s.n}</div><div class="ts-time">${s.t}</div></div></div>`).join('')}</div>
-    <button class="pay-now-btn" style="margin-top:1rem" onclick="closeCheckout();goHome()">Back to Home</button>`;
+    <button class="pay-now-btn" style="margin-top:1rem" onclick="closeCheckout();showPage('home')">Back to Home</button>
+    <button class="mback-btn" onclick="closeCheckout();showPage('orders')">📦 View My Orders</button>`;
 }
 
-// ══ RAZORPAY MODAL ════════════════════════════════════════
+// ═══ RAZORPAY ════════════════════════════════════════════════
 function openRzp(amount){
   document.getElementById('rzpAmt').textContent='₹'+amount;
   document.getElementById('rzpBody').innerHTML=rzpBodyHTML(amount);
@@ -704,56 +1128,111 @@ function rzpBodyHTML(amount){
   </div>
   ${rzpTab==='upi'?`
     <div class="rzp-upi-apps">
-      ${[['GPay','🟢'],['PhonePe','💜'],['Paytm','🔵'],['BHIM','🟠']].map(([n,ic])=>`<div class="rzp-app" onclick="toast('Redirecting to ${n}...')"><div class="ra-icon">${ic}</div><div>${n}</div></div>`).join('')}
+      ${[['GPay','🟢'],['PhonePe','💜'],['Paytm','🔵'],['BHIM','🟠']].map(([n,ic])=>`<div class="rzp-app" onclick="processPayment(${amount},'${n}')"><div class="ra-icon">${ic}</div><div>${n}</div></div>`).join('')}
     </div>
     <div style="text-align:center;font-size:.75rem;color:var(--lt);margin-bottom:.7rem">— or enter UPI ID —</div>
-    <input class="rzp-input" id="upiId" placeholder="name@upi (e.g. pari@okaxis)"/>
+    <input class="rzp-input" id="upiId" placeholder="yourname@upi (e.g. pari@okaxis)"/>
     <button class="rzp-pay-btn" onclick="processPayment(${amount},'UPI')">Pay ₹${amount}</button>`
   :rzpTab==='card'?`
-    <input class="rzp-input" id="cnum" placeholder="Card Number" maxlength="19" oninput="this.value=this.value.replace(/\D/g,'').replace(/(.{4})/g,'$1 ').trim()"/>
+    <input class="rzp-input" placeholder="Card Number" maxlength="19" oninput="let v=this.value.replace(/\D/g,'').substring(0,16);this.value=v.replace(/(.{4})/g,'$1 ').trim()"/>
     <div class="rzp-row">
-      <input class="rzp-input" placeholder="MM / YY" maxlength="5"/>
+      <input class="rzp-input" placeholder="MM / YY" maxlength="5" oninput="if(this.value.length===2&&!this.value.includes('/'))this.value+='/'"/>
       <input class="rzp-input" placeholder="CVV" maxlength="3" type="password"/>
     </div>
     <input class="rzp-input" placeholder="Name on Card"/>
-    <button class="rzp-pay-btn" onclick="processPayment(${amount},'Card')">Pay ₹${amount}</button>`
+    <button class="rzp-pay-btn" onclick="processPayment(${amount},'Debit/Credit Card')">Pay ₹${amount}</button>`
   :rzpTab==='nb'?`
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-bottom:.8rem">
-      ${[['SBI','🏦'],['HDFC','💙'],['ICICI','🟠'],['Axis','💜'],['Kotak','🔴'],['BOB','🟡']].map(([n,ic])=>`<div class="rzp-app" style="flex-direction:row;justify-content:flex-start;gap:.5rem" onclick="processPayment(${amount},'Net Banking - ${n}')"><span>${ic}</span><span style="font-size:.8rem">${n} Bank</span></div>`).join('')}
+      ${[['SBI','🏦'],['HDFC','💙'],['ICICI','🟠'],['Axis','💜'],['Kotak','🔴'],['BOB','🟡']].map(([n,ic])=>`<div class="rzp-app" style="flex-direction:row;justify-content:flex-start;gap:.5rem" onclick="processPayment(${amount},'${n} Net Banking')"><span>${ic}</span><span style="font-size:.8rem">${n} Bank</span></div>`).join('')}
     </div>
-    <button class="rzp-pay-btn" onclick="processPayment(${amount},'Net Banking')">Pay ₹${amount}</button>`
+    <button class="rzp-pay-btn" onclick="processPayment(${amount},'Net Banking')">Continue</button>`
   :`<div style="text-align:center;padding:1rem 0">
     <div style="font-size:3rem;margin-bottom:.6rem">💵</div>
-    <div style="font-weight:700;margin-bottom:.4rem">Cash on Delivery</div>
-    <div style="font-size:.82rem;color:var(--mt);margin-bottom:1.2rem">Keep ₹${amount} ready when the rider arrives</div>
-    <button class="rzp-pay-btn" onclick="processPayment(${amount},'Cash on Delivery')">Confirm Order</button>
+    <div style="font-weight:800;margin-bottom:.4rem">Cash on Delivery</div>
+    <div style="font-size:.82rem;color:var(--mt);margin-bottom:1.2rem">Keep ₹${amount} ready when rider arrives</div>
+    <button class="rzp-pay-btn" onclick="processPayment(${amount},'Cash on Delivery')">✅ Confirm Order</button>
   </div>`}
   <div class="rzp-secure">🔒 Secured by Razorpay · 256-bit SSL encryption</div>`;
 }
 
 function processPayment(amount,method){
-  document.getElementById('rzpBody').innerHTML=`<div class="pay-processing"><div class="pay-spin"></div><div style="font-weight:700;margin-bottom:.3rem">Processing Payment...</div><div style="font-size:.82rem;color:var(--mt)">Please do not close this window</div></div>`;
+  document.getElementById('rzpBody').innerHTML=`<div class="pay-processing"><div class="pay-spin"></div><div style="font-weight:800;margin-bottom:.3rem">Processing Payment...</div><div style="font-size:.82rem;color:var(--mt)">Please do not close this window</div></div>`;
   setTimeout(()=>{
     document.getElementById('rzpBody').innerHTML=`<div class="pay-success">
       <div class="success-circle">✓</div>
-      <div style="font-size:1.15rem;font-weight:800;margin-bottom:.3rem">Payment Successful!</div>
+      <div style="font-size:1.2rem;font-weight:900;margin-bottom:.3rem">Payment Successful!</div>
       <div style="font-size:.85rem;color:var(--mt);margin-bottom:.2rem">₹${amount} paid via ${method}</div>
-      <div style="font-size:.75rem;color:var(--lt);margin-bottom:1.5rem">Transaction ID: TXN${Math.floor(1e9+Math.random()*9e9)}</div>
+      <div style="font-size:.75rem;color:var(--lt);margin-bottom:1.5rem">Txn ID: TXN${Math.floor(1e9+Math.random()*9e9)}</div>
       <button class="rzp-pay-btn" onclick="paymentDone()">View Order Tracking →</button>
     </div>`;
+    // Save order
+    const cartItems=Object.values(cart);
+    if(cartItems.length){
+      const r=restaurants.find(x=>x.id===cartItems[0].rid);
+      orderHistory.unshift({restId:r?.id||1,restName:r?.name||'Restaurant',emoji:r?.emoji||'🍽️',date:new Date().toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'}),items:cartItems.map(c=>c.item.n+' ×'+c.qty).join(', '),total:amount});
+    }
     cart={};promoOn=false;updateCartUI();
+    document.getElementById('psOrderCount').textContent=orderHistory.length+' orders';
   },2500);
 }
 
 function paymentDone(){
-  closeRzp();
-  chkStep=3;
+  closeRzp();chkStep=3;
   document.getElementById('chkModal').classList.add('on');
   renderChk();
 }
 
-// ══ TOAST ═════════════════════════════════════════════════
-function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('on');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('on'),2600);}
+// ═══ RATING MODAL ════════════════════════════════════════════
+let currentRating=0;
+function openRateModal(restId){
+  const r=restaurants.find(x=>x.id===restId)||{name:'Restaurant'};
+  currentRating=0;
+  document.getElementById('rateBody').innerHTML=`
+    <div style="text-align:center;margin-bottom:1rem">
+      <div style="font-size:2.5rem;margin-bottom:.5rem">${r.emoji||'🍽️'}</div>
+      <div style="font-weight:800;font-size:1rem">How was your order from ${r.name}?</div>
+    </div>
+    <div class="rate-stars" id="rateStars">
+      ${[1,2,3,4,5].map(i=>`<span class="rate-star" onclick="setRating(${i})" onmouseover="hoverRating(${i})" onmouseout="resetHover()">★</span>`).join('')}
+    </div>
+    <div class="fg"><label>Tell us more (optional)</label><textarea id="rateText" placeholder="Great food! Fast delivery..." style="resize:none;height:80px;line-height:1.6"></textarea></div>
+    <button class="pay-now-btn" onclick="submitRating()">Submit Review</button>`;
+  document.getElementById('rateModal').classList.add('on');
+}
+
+function closeRateModal(){document.getElementById('rateModal').classList.remove('on');}
+
+function setRating(n){
+  currentRating=n;
+  document.querySelectorAll('.rate-star').forEach((s,i)=>{s.classList.toggle('on',i<n);});
+}
+
+function hoverRating(n){document.querySelectorAll('.rate-star').forEach((s,i)=>{s.style.opacity=i<n?'1':'.2';});}
+function resetHover(){document.querySelectorAll('.rate-star').forEach((s,i)=>{s.style.opacity=i<currentRating?'1':'.2';});}
+
+function submitRating(){
+  if(!currentRating){toast('⭐ Please select a rating!');return;}
+  closeRateModal();
+  toast('🙏 Thanks for your review! '+('⭐'.repeat(currentRating)));
+}
+
+// ═══ TOAST ════════════════════════════════════════════════════
+function toast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('on');
+  clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('on'),2600);
+}
+
+// ═══ KEYBOARD SHORTCUTS ══════════════════════════════════════
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){closeCheckout();closeRzp();closeRateModal();closeCart();}
+  if(e.key==='/'&&document.activeElement.tagName!=='INPUT'&&document.activeElement.tagName!=='TEXTAREA'){
+    e.preventDefault();document.getElementById('nsearch').focus();
+  }
+});
+
+document.getElementById('rateModal').addEventListener('click',e=>{if(e.target===document.getElementById('rateModal'))closeRateModal();});
+document.getElementById('chkModal').addEventListener('click',e=>{if(e.target===document.getElementById('chkModal'))closeCheckout();});
 
 init();
 </script>
